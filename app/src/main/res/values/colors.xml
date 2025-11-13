@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="primaryBlue">#1E88E5</color>
+    <color name="lightTurquoise">#4DD0E1</color>
+    <color name="goldAccent">#FFC107</color>
+    <color name="visitedCountryGreen">#66BB6A</color>
+    <color name="backgroundSky">#E3F2FD</color>
+</resources>
