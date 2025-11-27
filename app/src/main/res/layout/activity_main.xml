@@ -9,91 +9,121 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="11dp"
         android:background="#3F00BCD4"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/tvhomepage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/btnpro"
-            android:layout_width="117dp"
-            android:layout_height="61dp"
-            android:backgroundTint="#6D3F51B5"
-            android:text="פרופיל"
-            app:cornerRadius="0dp"
-            android:textSize="18dp" />
     </LinearLayout>
-
-
-    <ImageView
-        android:id="@+id/ivpic"
-        android:layout_width="120dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/countriesamash"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="176dp" />
 
     <TextView
         android:id="@+id/tvhomepage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="27dp"
+        android:fontFamily="@font/skrine"
         android:gravity="center"
-        android:text="דף הבית"
-
+        android:text="Home Page"
         android:textColor="@color/black"
         android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ivpic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/btnconect"
+        android:layout_width="149dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
+        android:backgroundTint="#322196F3"
+        android:fontFamily="@font/skrine"
+        android:text="Login"
+        android:textSize="25dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnsigh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivpic" />
+
+    <Button
+        android:id="@+id/btnsigh"
+        android:layout_width="149dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="18dp"
+        android:backgroundTint="#322196F3"
+        android:fontFamily="@font/skrine"
+        android:text="Sign Up"
+        android:textSize="25dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnstat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnconect" />
+
+    <Button
+        android:id="@+id/btnstat"
+        android:layout_width="149dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="23dp"
+        android:backgroundTint="#322196F3"
+        android:fontFamily="@font/skrine"
+        android:text="Statistics"
+        android:textSize="25dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnodot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnsigh" />
+
+    <Button
+        android:id="@+id/btnodot"
+        android:layout_width="149dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="116dp"
+        android:backgroundTint="#322196F3"
+        android:fontFamily="@font/skrine"
+        android:text="About"
+        android:textSize="25dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnstat" />
+
+    <ImageView
+        android:id="@+id/ivpic"
+        android:layout_width="226dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="402dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintTop_toBottomOf="@+id/btnpro"
+        app:srcCompat="@drawable/logo2amash" />
 
     <Button
-        android:id="@+id/btncountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#6D3F51B5"
-        android:text="רשימת מדינות"
-        android:textSize="18dp"
+        android:id="@+id/btnpro"
+        android:layout_width="113dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="125dp"
+        android:backgroundTint="#2196F3"
+        android:fontFamily="@font/skrine"
+        android:text="Profile"
+        android:textSize="25dp"
         app:cornerRadius="0dp"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="383dp" />
-
-    <Button
-        android:id="@+id/btnpic"
-        android:layout_width="149dp"
-        android:layout_height="69dp"
-        android:backgroundTint="#6D3F51B5"
-        android:text="תמונות"
-        android:textSize="18dp"
-        app:cornerRadius="0dp"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="306dp" />
-
-    <Button
-        android:id="@+id/btnstat"
-        android:layout_width="155dp"
-        android:layout_height="61dp"
-        android:backgroundTint="#6D3F51B5"
-        android:text="סטטיסטיקה"
-        android:textSize="18dp"
-        app:cornerRadius="0dp"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="442dp" />
-
-    <Button
-        android:id="@+id/btnwish"
-        android:layout_width="151dp"
-        android:layout_height="62dp"
-        android:text="חלומות"
-        android:textSize="18dp"
-        app:cornerRadius="0dp"
-        android:backgroundTint="#6D3F51B5"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="515dp" />
+        app:layout_constraintBottom_toTopOf="@+id/ivpic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

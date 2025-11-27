@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "969426855496",
+    "firebase_url": "https://finalprojamash-default-rtdb.firebaseio.com",
+    "project_id": "finalprojamash",
+    "storage_bucket": "finalprojamash.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969426855496:android:acc941f974544ed5019a7d",
+        "android_client_info": {
+          "package_name": "com.example.finalprojamash"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-dejJkgNsswnS20eDYyM3bsMxS5smjPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

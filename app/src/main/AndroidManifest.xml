@@ -6,13 +6,28 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/countriesamash"
+        android:icon="@mipmap/logo2amash"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/countriesamash"
+        android:roundIcon="@mipmap/logo2amash"
         android:supportsRtl="true"
         android:theme="@style/Theme.Finalprojamash">
         <activity
+            android:name=".Loginamash"
+            android:exported="false" />
+        <activity
+            android:name=".UserProfileamash"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivityamash"
+            android:exported="false" />
+        <activity
+            android:name=".odotamash"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
