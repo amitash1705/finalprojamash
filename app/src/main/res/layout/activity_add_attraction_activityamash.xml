@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddAttractionActivityamash">
+
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="90dp"
+        android:fontFamily="@font/skrine"
+        android:text="Add New Attraction"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/spCountry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Spinner
+        android:id="@+id/spCountry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/spType"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <Spinner
+        android:id="@+id/spType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="29dp"
+        app:layout_constraintBottom_toTopOf="@+id/etPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCountry" />
+
+    <EditText
+        android:id="@+id/etPrice"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/skrine"
+        android:gravity="center"
+        android:hint="price"
+        android:inputType="numberDecimal"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/etDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etCity"
+        app:layout_constraintTop_toBottomOf="@+id/spType" />
+
+    <EditText
+        android:id="@+id/etCity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="17dp"
+        android:fontFamily="@font/skrine"
+        android:gravity="center"
+        android:hint="city"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/etDetails"
+        app:layout_constraintEnd_toStartOf="@+id/etPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spType" />
+
+    <EditText
+        android:id="@+id/etDetails"
+        android:layout_width="212dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="27dp"
+        android:fontFamily="@font/skrine"
+        android:hint="details"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnGallery"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPrice" />
+
+    <Button
+        android:id="@+id/btnGallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="9dp"
+        android:backgroundTint="#322196F3"
+        android:fontFamily="@font/skrine"
+        android:text="Gallery"
+        android:textSize="25dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnPhoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.915"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/etDetails" />
+
+    <Button
+        android:id="@+id/btnPhoto"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="11dp"
+        android:backgroundTint="#322196F3"
+        android:fontFamily="@font/skrine"
+        android:text="Photo"
+        android:textSize="25dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBackHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/btnGallery" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBackHome"
+        app:layout_constraintEnd_toStartOf="@+id/btnPhoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDetails"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnBackHome"
+        android:layout_width="93dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#322196F3"
+        android:fontFamily="@font/skrine"
+        android:text="back"
+        android:textSize="25dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddNewAttraction"
+        app:layout_constraintEnd_toEndOf="@+id/btnPhoto"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/btnPhoto" />
+
+    <Button
+        android:id="@+id/btnAddNewAttraction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#322196F3"
+        android:fontFamily="@font/skrine"
+        android:text="Creat New Attraction"
+        android:textSize="25dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBackHome" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

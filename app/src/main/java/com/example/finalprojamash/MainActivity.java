@@ -10,26 +10,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.finalprojamash.services.DatabaseService;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button btnPro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        btnPro = findViewById(R.id.btnpro);
+
+
         Button btnconect = findViewById(R.id.btnconect);
         Button btnSign = findViewById(R.id.btnsigh);
-
-        // הכפתור של פרופיל
-        btnPro = findViewById(R.id.btnpro);
-        btnPro.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, UserProfileamash.class);
-            startActivity(intent);
-        });
-
 
         // כפתור הרשמה
         btnSign.setOnClickListener(v -> {

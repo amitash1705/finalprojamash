@@ -71,6 +71,7 @@
             android:backgroundTint="#322196F3"
             android:fontFamily="@font/skrine"
             android:text="back"
+            android:layout_gravity="center"
             android:textSize="25dp"
             app:cornerRadius="0dp" />
     </LinearLayout>

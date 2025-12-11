@@ -1,6 +1,7 @@
 package com.example.finalprojamash;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,11 @@ public class RegisterActivityamash extends AppCompatActivity implements View.OnC
 
     DatabaseService databaseService;
 
+    SharedPreferences sharedPreferences;
+    public  static  final  String mySharedPref="myPref";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,8 @@ public class RegisterActivityamash extends AppCompatActivity implements View.OnC
 
 
         databaseService = DatabaseService.getInstance();
+
+        sharedPreferences=getSharedPreferences(mySharedPref,MODE_PRIVATE);
 
         etFname = findViewById(R.id.etFname);
         etLname = findViewById(R.id.etLaname);
@@ -142,6 +150,14 @@ public class RegisterActivityamash extends AppCompatActivity implements View.OnC
                 Log.d(TAG, "createUserInDatabase: User created successfully");
                 /// save the user to shared preferences
                 user.setId(uid);
+
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+
+                    editor.putString("email",Email);
+                    editor.putString("password",PassWord);
+                    editor.commit();
+
+
                 Log.d(TAG, "createUserInDatabase: Redirecting to MainActivity");
                 /// Redirect to MainActivity and clear back stack to prevent user from going back to register screen
                 Intent mainIntent = new Intent(RegisterActivityamash.this, MainActivity.class);

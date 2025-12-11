@@ -1,6 +1,7 @@
 package com.example.finalprojamash;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +23,12 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
     Button btnSubmit;
 
     private static final String TAG = "LoginActivity";
+
     private DatabaseService databaseService;
+    SharedPreferences sharedPreferences;
+    public  static  final  String mySharedPref="myPref";
+
+    private String email,password;
 
 
     @Override
@@ -30,16 +36,34 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_loginamash);
+
+//  הוספה עכשיו
+
+        sharedPreferences=getSharedPreferences(mySharedPref,MODE_PRIVATE);
+
+        databaseService = DatabaseService.getInstance();
+
+
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        databaseService = DatabaseService.getInstance();
+
+
+
+       email= sharedPreferences.getString("email","");
+       password=  sharedPreferences.getString("password","");
 
         etEmail = findViewById(R.id.et_loginamash_email);
         etPassword = findViewById(R.id.et_loginamash_password);
+
+
+        etEmail.setText(email);
+        etPassword.setText(password);
         btnSubmit = findViewById(R.id.btn_login_submit);
         Button btnBackHome = findViewById(R.id.btnBackHome);
 
@@ -57,8 +81,8 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
         if (v.getId() == btnSubmit.getId()) {
             Log.d(TAG, "onClick: Login button clicked");
 
-            String email = etEmail.getText().toString().trim();
-            String password = etPassword.getText().toString().trim();
+             email = etEmail.getText().toString().trim();
+             password = etPassword.getText().toString().trim();
 
             // Validate input
             if (email.isEmpty()) {
@@ -89,7 +113,16 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
             public void onCompleted(String uid) {
                 Log.d(TAG, "User logged in! UID: " + uid);
 
-                Intent mainIntent = new Intent(Loginamash.this, MainActivity.class);
+
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+
+
+                editor.putString("email",email);
+                editor.putString("password",password);
+                editor.commit();
+
+
+                Intent mainIntent = new Intent(Loginamash.this, AdminActivityamash.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(mainIntent);
             }

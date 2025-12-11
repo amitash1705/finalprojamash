@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/username"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="149dp"
         android:layout_marginBottom="73dp"
-        android:backgroundTint="#009688"
+        android:backgroundTint="#322196F3"
         android:fontFamily="@font/skrine"
         android:text="Back"
         android:textSize="25dp"

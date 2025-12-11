@@ -2,18 +2,23 @@ package com.example.finalprojamash.model;
 
 public class Attraction {
     protected String id;
+
+    protected String name;
     protected String country;
+
     protected String type;
     protected String address;
     protected String city;
-    protected String price;
+    protected double  price;
     protected String pic;
     protected String ages;
     protected String details;
+    protected String web;
 
 
-    public Attraction(String id, String country, String type, String address, String city, String price, String pic, String ages, String details) {
+    public Attraction(String id, String name, String country, String type, String address, String city, double price, String pic, String ages, String details, String web) {
         this.id = id;
+        this.name = name;
         this.country = country;
         this.type = type;
         this.address = address;
@@ -22,6 +27,7 @@ public class Attraction {
         this.pic = pic;
         this.ages = ages;
         this.details = details;
+        this.web = web;
     }
 
     public Attraction() {
@@ -67,13 +73,7 @@ public class Attraction {
         this.city = city;
     }
 
-    public String getPrice() {
-        return price;
-    }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
 
     public String getPic() {
         return pic;
@@ -99,18 +99,44 @@ public class Attraction {
         this.details = details;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getWeb() {
+        return web;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Attraction{" +
                 "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
                 ", type='" + type + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
-                ", price='" + price + '\'' +
+                ", price=" + price +
                 ", pic='" + pic + '\'' +
                 ", ages='" + ages + '\'' +
                 ", details='" + details + '\'' +
+                ", web='" + web + '\'' +
                 '}';
     }
 }

@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+
+
 import com.example.finalprojamash.model.Attraction;
 import com.example.finalprojamash.model.Travel;
 import com.example.finalprojamash.model.User;
@@ -289,19 +291,21 @@ public class DatabaseService {
                 .addOnCompleteListener(task -> {
 
                     if (task.isSuccessful()) {
-                        Log.d("TAG", "createUserWithEmail:success");
+                        Log.d(TAG, "loginUser: success");
 
                         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         callback.onCompleted(uid);
 
                     } else {
-                        Log.w("TAG", "createUserWithEmail:failure", task.getException());
+                        Log.w(TAG, "loginUser: failure", task.getException());
 
                         if (callback != null)
                             callback.onFailed(task.getException());
                     }
                 });
     }
+
+
 
 
     /// get a user from the database

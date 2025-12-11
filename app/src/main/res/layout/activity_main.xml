@@ -23,9 +23,9 @@
 
     <TextView
         android:id="@+id/tvhomepage"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="27dp"
+        android:layout_width="216dp"
+        android:layout_height="79dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="@font/skrine"
         android:gravity="center"
         android:text="Home Page"
@@ -34,8 +34,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ivpic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnconect"
@@ -99,31 +99,13 @@
 
     <ImageView
         android:id="@+id/ivpic"
-        android:layout_width="226dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="402dp"
+        android:layout_width="197dp"
+        android:layout_height="214dp"
+        android:layout_marginBottom="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnpro"
         app:srcCompat="@drawable/logo2amash" />
-
-    <Button
-        android:id="@+id/btnpro"
-        android:layout_width="113dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="125dp"
-        android:backgroundTint="#2196F3"
-        android:fontFamily="@font/skrine"
-        android:text="Profile"
-        android:textSize="25dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/ivpic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
