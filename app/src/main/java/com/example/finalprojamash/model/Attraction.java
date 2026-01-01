@@ -16,7 +16,9 @@ public class Attraction {
     protected String web;
 
 
-    public Attraction(String id, String name, String country, String type, String address, String city, double price, String pic, String ages, String details, String web) {
+    public Attraction(String id, String name, String country, String type,
+                      String address, String city, double price, String pic,
+                      String ages, String details, String web) {
         this.id = id;
         this.name = name;
         this.country = country;

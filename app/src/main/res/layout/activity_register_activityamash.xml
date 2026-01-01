@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="154dp"
-        android:fontFamily="@font/skrine"
+        android:fontFamily="@font/mimosa"
         android:text="sigh up"
         android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -57,7 +57,7 @@ public class UserProfileamash extends AppCompatActivity {
         // הכפתור חזרה לדף הבית
         Button btnBackHome = findViewById(R.id.btnBackHome);
         btnBackHome.setOnClickListener(v -> {
-            Intent intent = new Intent(UserProfileamash.this, MainActivity.class);
+            Intent intent = new Intent(UserProfileamash.this, AdminActivityamash.class);
             startActivity(intent);
             finish();
         });

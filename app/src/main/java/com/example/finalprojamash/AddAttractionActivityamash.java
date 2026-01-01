@@ -8,8 +8,10 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -19,6 +21,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.finalprojamash.model.Attraction;
+import com.example.finalprojamash.services.DatabaseService;
 import com.example.finalprojamash.utils.ImageUtil;
 
 public class AddAttractionActivityamash extends AppCompatActivity {
@@ -31,11 +35,39 @@ public class AddAttractionActivityamash extends AppCompatActivity {
     /// Activity result launcher for capturing image from camera
     private ActivityResultLauncher<Intent> captureImageLauncher;
 
+
+    private EditText etCity, etPrice, etDetails, etName, etAge, etAdress, etWeb ;
+    private Spinner spType, spCountry;
+    private Button btnGallery, btnPhoto, btnAddNewAttraction;
+
+
+    // constant to compare
+    // the activity result code
+    int SELECT_PICTURE = 200;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_attraction_activityamash);
+
+        etCity = findViewById(R.id.etCity);
+        etPrice = findViewById(R.id.etPrice);
+        etDetails = findViewById(R.id.etDetails);
+        etName = findViewById(R.id.etName);
+        etAge = findViewById(R.id.etAge);
+        etAdress = findViewById(R.id.etAdress);
+        etWeb = findViewById(R.id.etWeb);
+
+        spType = findViewById(R.id.spType);
+        spCountry = findViewById(R.id.spCountry);
+
+        btnGallery = findViewById(R.id.btnGallery);
+        btnPhoto = findViewById(R.id.btnPhoto);
+        btnAddNewAttraction = findViewById(R.id.btnAddNewAttraction);
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -46,14 +78,52 @@ public class AddAttractionActivityamash extends AppCompatActivity {
         setUpSpinner();
         setUpGallery();
 
-        Button btnBackHome = findViewById(R.id.btnBackHome);
+        Button btnAddNewAttraction = findViewById(R.id.btnAddNewAttraction);
+        btnAddNewAttraction.setOnClickListener(v -> {
 
-        btnBackHome.setOnClickListener(v -> {
-            Intent intent = new Intent(AddAttractionActivityamash.this, AdminActivityamash.class);
-            startActivity(intent);
-            finish(); // סוגר את דף האודות כדי שלא יחזור אליו בלחיצה על BACK
+            addToDB();
         });
 
+    }
+
+    private void addToDB() {
+        String city = etCity.getText().toString()+"";
+        String price = etPrice.getText().toString()+"";
+        String details = etDetails.getText().toString()+"";
+        String name = etName.getText().toString()+"";
+        String age = etAge.getText().toString()+"";
+        String adress = etAdress.getText().toString()+"";
+        String web = etWeb.getText().toString()+"";
+
+
+       String type = spType.getSelectedItem().toString();
+       String country = spCountry.getSelectedItem().toString();
+
+        // בדיקה שכל השדות מלאים
+        if (city.isEmpty() || price.isEmpty() || details.isEmpty() || name.isEmpty() || age.isEmpty() || adress.isEmpty() || web.isEmpty()) {
+            Toast.makeText(this, "fill all information please", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        // create attraction
+        String id = DatabaseService.getInstance().generateAttractionId();
+        String pic = ImageUtil.convertTo64Base(imageView);
+        Attraction attraction = new Attraction(id,name,country,type,adress,city,Double.parseDouble(price),pic,age,details,web);
+
+        ///  call to database service
+        DatabaseService.getInstance().createNewAttraction(attraction, new DatabaseService.DatabaseCallback<Void>() {
+            @Override
+            public void onCompleted(Void v) {
+                Toast.makeText(AddAttractionActivityamash.this, "Yay!", Toast.LENGTH_SHORT).show();
+                finish(); // סוגר את דף האודות כדי שלא יחזור אליו בלחיצה על BACK
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+
+            }
+        });
     }
 
     private void setUpGallery() {
