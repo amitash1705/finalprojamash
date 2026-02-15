@@ -37,6 +37,14 @@ public class AdminActivityamash extends AppCompatActivity {
         });
 
 
+        Button btnattraction = findViewById(R.id.btnattraction);
+
+        btnattraction.setOnClickListener(v -> {
+            Intent intent1 = new Intent(AdminActivityamash.this, attractionlistamash.class);
+            startActivity(intent1);
+        });
+
+
 
         // מוצאים את הכפתור לפי ה-id
         Button btnAddNewAttraction = findViewById(R.id.btnAddNewAttraction);
@@ -49,6 +57,12 @@ public class AdminActivityamash extends AppCompatActivity {
         });
 
 
+        Button btntrip = findViewById(R.id.btntrip);
+
+        btntrip.setOnClickListener(v -> {
+            Intent intent1 = new Intent(AdminActivityamash.this, AddNewTravelamash.class);
+            startActivity(intent1);
+        });
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

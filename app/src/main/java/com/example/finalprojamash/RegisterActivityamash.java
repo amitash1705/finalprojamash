@@ -61,7 +61,7 @@ public class RegisterActivityamash extends AppCompatActivity implements View.OnC
         tvName = findViewById(R.id.tvName);
         btnGoAct2 = findViewById(R.id.btnSubmit);
         btnGoAct2.setOnClickListener(this);
-        backButton = findViewById(R.id.button);
+        backButton = findViewById(R.id.btnBackHome);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,15 +4,11 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false" />
-    <!-- Camera permission -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!-- Storage permission -->
+        android:required="false" /> <!-- Camera permission -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- Storage permission -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- Internet permission -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Internet permission -->
     <uses-permission android:name="android.permission.INTERNET" />
-
 
     <application
         android:allowBackup="true"
@@ -23,6 +19,12 @@
         android:roundIcon="@mipmap/logo2amash"
         android:supportsRtl="true"
         android:theme="@style/Theme.Finalprojamash">
+        <activity
+            android:name=".AddNewTravelamash"
+            android:exported="false" />
+        <activity
+            android:name=".attractionlistamash"
+            android:exported="false" />
         <activity
             android:name=".AddAttractionActivityamash"
             android:exported="false" />

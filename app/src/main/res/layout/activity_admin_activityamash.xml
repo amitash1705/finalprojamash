@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".AdminActivityamash">
 
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
@@ -24,17 +23,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <Button
         android:id="@+id/btnAddNewAttraction"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="59dp"
         android:backgroundTint="#322196F3"
-        android:fontFamily="@font/skrine"
+        android:fontFamily="@font/mimosa"
         android:text="Add Attraction"
-        android:textSize="25dp"
         android:textColor="@color/black"
+        android:textSize="25dp"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/btnpro"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,64 +45,62 @@
         android:layout_height="0dp"
         android:layout_marginBottom="62dp"
         android:backgroundTint="#322196F3"
-        android:fontFamily="@font/skrine"
+        android:fontFamily="@font/mimosa"
         android:text="Profile"
-        android:textSize="25dp"
         android:textColor="@color/black"
+        android:textSize="25dp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/btnattraction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAddNewAttraction" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnattraction"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="59dp"
         android:backgroundTint="#322196F3"
-        android:fontFamily="@font/skrine"
+        android:fontFamily="@font/mimosa"
         android:text="Attraction"
-        android:textSize="25dp"
         android:textColor="@color/black"
+        android:textSize="25dp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/btntrip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnpro" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btntrip"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="15dp"
         android:backgroundTint="#322196F3"
-        android:fontFamily="@font/skrine"
+        android:fontFamily="@font/mimosa"
         android:text="Trips"
-        android:textSize="25dp"
         android:textColor="@color/black"
+        android:textSize="25dp"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/btnBackHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/btnattraction" />
 
     <Button
         android:id="@+id/btnBackHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="15dp"
         android:backgroundTint="#322196F3"
-        android:fontFamily="@font/skrine"
+        android:fontFamily="@font/mimosa"
         android:text="back"
-        android:textSize="25dp"
         android:textColor="@color/black"
+        android:textSize="25dp"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
-
+        app:layout_constraintTop_toBottomOf="@+id/btntrip" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

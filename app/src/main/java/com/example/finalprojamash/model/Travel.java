@@ -8,6 +8,7 @@ public class Travel {
 
     protected  String name;
 
+
     List<Attraction> attractionList;
 
     String details;

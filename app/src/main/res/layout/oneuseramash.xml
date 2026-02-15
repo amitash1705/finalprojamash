@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    //// אני צריכה להעתיק את הכרטיסייה // ריבוע של האטרקציה אחת קוראים לדף one attraction  ..
+    פשוט להעתיק את הקוד של הxml של העיצוב של הכרטיסייה כי אני צריכה לעשות כמו רשימה של האטרקציות רשימה של המשתמשים שנרשמו לאפליקציה שלי
+    . להעתיק את העיצוב ואני צריכה לסדר גם את הuseradapter  לפי התיקון של מה שעשיתי ....
+    אחרי שסדרתי את העיצוב צריך לחבר את זה ל adapter  כדי לעשות את הרשימה של המשתמשים ...
+
+
+
+
+</LinearLayout>

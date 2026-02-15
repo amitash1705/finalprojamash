@@ -37,7 +37,8 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_loginamash);
 
-//  הוספה עכשיו
+
+      //  הוספה עכשיו
 
         sharedPreferences=getSharedPreferences(mySharedPref,MODE_PRIVATE);
 
@@ -68,6 +69,7 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
         Button btnBackHome = findViewById(R.id.btnBackHome);
 
         btnSubmit.setOnClickListener(this);
+
 
         btnBackHome.setOnClickListener(v -> {
             Intent intent = new Intent(Loginamash.this, MainActivity.class);
