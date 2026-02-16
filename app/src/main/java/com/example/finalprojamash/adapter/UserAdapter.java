@@ -34,7 +34,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.oneuseramash, parent, false);
         return new ViewHolder(view);
     }
 
@@ -43,14 +43,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         User user = userList.get(position);
         if (user == null) return;
 
-        holder.tvName.setText(user.getFname());
+        holder.tvFullName.setText(user.getFname());
         holder.tvEmail.setText(user.getEmail());
         holder.tvPhone.setText(user.getPhone());
         
         // Set initials
         String initials = "";
 
-        holder.tvInitials.setText(initials.toUpperCase());
+
         
         // Show admin chip if user is admin
 
@@ -100,16 +100,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvEmail, tvPhone, tvInitials;
-        Chip chipRole;
+        TextView tvFullName, tvEmail, tvPhone;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tv_item_user_name);
-            tvEmail = itemView.findViewById(R.id.tv_item_user_email);
-            tvPhone = itemView.findViewById(R.id.tv_item_user_phone);
-            tvInitials = itemView.findViewById(R.id.tv_user_initials);
-            chipRole = itemView.findViewById(R.id.chip_user_role);
+            tvFullName = itemView.findViewById(R.id.tvFullName);
+            tvEmail = itemView.findViewById(R.id.tvEmail);
+            tvPhone = itemView.findViewById(R.id.tvPhone);
+
         }
     }
 }
