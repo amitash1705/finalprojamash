@@ -123,10 +123,19 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
                 editor.putString("password",password);
                 editor.commit();
 
+                if(email.equals("amit@gmail.com")&& (password.equals("123456"))) {
 
-                Intent mainIntent = new Intent(Loginamash.this, AdminActivityamash.class);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(mainIntent);
+                    Intent mainIntent = new Intent(Loginamash.this, AdminActivityamash.class);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(mainIntent);
+                }
+
+                else {
+                    Intent mainIntent = new Intent(Loginamash.this, UserPageActivity.class);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(mainIntent);
+
+                }
             }
 
             @Override

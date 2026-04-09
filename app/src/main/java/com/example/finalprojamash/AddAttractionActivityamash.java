@@ -152,7 +152,7 @@ public class AddAttractionActivityamash extends AppCompatActivity {
                 });
 
 
-        findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
+       btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImageUtil.requestPermission(AddAttractionActivityamash.this);
@@ -161,7 +161,7 @@ public class AddAttractionActivityamash extends AppCompatActivity {
         });
 
 
-        findViewById(R.id.btnPhoto).setOnClickListener(new View.OnClickListener() {
+       btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImageUtil.requestPermission(AddAttractionActivityamash.this);

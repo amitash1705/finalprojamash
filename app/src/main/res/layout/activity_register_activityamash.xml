@@ -16,6 +16,7 @@
         android:fontFamily="@font/mimosa"
         android:text="sigh up"
         android:textSize="50dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/etFname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,8 +111,10 @@
 
     <Button
         android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="53dp"
         android:backgroundTint="#322196F3"
         android:fontFamily="@font/mimosa"

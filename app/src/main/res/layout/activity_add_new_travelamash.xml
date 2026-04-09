@@ -37,7 +37,7 @@
     <EditText
         android:id="@+id/etTravelDetails"
         android:layout_width="359dp"
-        android:layout_height="53dp"
+        android:layout_height="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="45dp"
@@ -53,10 +53,10 @@
         android:id="@+id/tvAttractions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="130dp"
         android:layout_marginBottom="411dp"
         android:fontFamily="@font/mimosa"
-        android:text="Attractions"
+        android:text="Choose An Attraction"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnAddTravel"
@@ -83,7 +83,7 @@
     <TextView
         android:id="@+id/tvSelectedAttraction"
         android:layout_width="286dp"
-        android:layout_height="24dp"
+        android:layout_height="40dp"
         android:layout_marginStart="60dp"
         android:layout_marginBottom="15dp"
         android:text=""
@@ -93,8 +93,10 @@
 
     <Button
         android:id="@+id/btnAddTravel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="1dp"
         android:backgroundTint="#322196F3"
         android:fontFamily="@font/mimosa"

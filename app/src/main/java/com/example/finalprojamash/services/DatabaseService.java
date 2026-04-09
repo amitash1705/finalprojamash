@@ -43,6 +43,8 @@ public class DatabaseService {
     /// @see DatabaseService#readData(String)
     private static final String USERS_PATH = "users",
             ATTRACTIONS_PATH = "attractions",
+
+            USERTRAVEL_PATH = "usertravel",
             TRAVELS_PATH = "travels";
 
     /// callback interface for database operations
@@ -481,8 +483,13 @@ public class DatabaseService {
     /// @see DatabaseCallback
     /// @see Travel
     public void createNewTravel(@NotNull final Travel travel, @Nullable final DatabaseCallback<Void> callback) {
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String uid= mAuth.getUid();
         writeData(TRAVELS_PATH + "/" + travel.getId(), travel, callback);
+        writeData(USERTRAVEL_PATH + "/" + uid+"/"+travel.getId(), travel, callback);
     }
+
 
     /// get a travel from the database
     ///
@@ -492,7 +499,7 @@ public class DatabaseService {
     ///                                                               if the operation fails, the callback will receive an exception
     /// @see DatabaseCallback
     /// @see Travel
-    public void getTravel(@NotNull final String travelId, @NotNull final DatabaseCallback<Travel> callback) {
+    public void getTravel(@NotNull final String travelId, @NotNull final DatabaseService.DatabaseCallback<Travel> callback) {
         getData(TRAVELS_PATH + "/" + travelId, Travel.class, callback);
     }
 
@@ -500,7 +507,7 @@ public class DatabaseService {
     ///
     /// @param callback the callback to call when the operation is completed
     ///                                                               the callback will receive a list of travel objects
-    public void getTravelList(@NotNull final DatabaseCallback<List<Travel>> callback) {
+    public void getTravelList(@NotNull final DatabaseService.DatabaseCallback<List<Travel>> callback) {
         getDataList(TRAVELS_PATH, Travel.class, callback);
     }
 
@@ -508,19 +515,13 @@ public class DatabaseService {
     ///
     /// @param uid      the id of the user to get the travels for
     /// @param callback the callback to call when the operation is completed
-    public void getUserTravelList(@NotNull String uid, @NotNull final DatabaseCallback<List<Travel>> callback) {
-        getTravelList(new DatabaseCallback<>() {
-            @Override
-            public void onCompleted(List<Travel> travels) {
-                travels.removeIf(travel -> !Objects.equals(travel.getId(), uid));
-                callback.onCompleted(travels);
-            }
+    public void getUserTravelList( @NotNull final DatabaseService.DatabaseCallback<List<Travel>> callback) {
 
-            @Override
-            public void onFailed(Exception e) {
-                callback.onFailed(e);
-            }
-        });
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String uid= mAuth.getUid();
+        getDataList(USERTRAVEL_PATH + "/" + uid, Travel.class, callback);
+
     }
 
 
@@ -538,7 +539,13 @@ public class DatabaseService {
     /// @param travelId   the id of the travel to delete
     /// @param callback the callback to call when the operation is completed
     public void deleteTravel(@NotNull final String travelId, @Nullable final DatabaseCallback<Void> callback) {
-        deleteData(TRAVELS_PATH + "/" + travelId, callback);
+
+
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String uid= mAuth.getUid();
+        deleteData(TRAVELS_PATH + "/" + travelId,  callback);
+        deleteData(USERTRAVEL_PATH + "/" + uid+"/"+travelId, callback);
     }
 
     // endregion travel section

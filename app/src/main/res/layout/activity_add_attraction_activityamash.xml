@@ -91,7 +91,7 @@
     <Button
         android:id="@+id/btnGallery"
         android:layout_width="145dp"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#322196F3"
@@ -106,7 +106,7 @@
     <Button
         android:id="@+id/btnPhoto"
         android:layout_width="145dp"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#322196F3"
@@ -136,7 +136,7 @@
     <Button
         android:id="@+id/btnAddNewAttraction"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"

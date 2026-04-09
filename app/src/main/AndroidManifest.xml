@@ -20,6 +20,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finalprojamash">
         <activity
+            android:name=".Travelprofileamash"
+            android:exported="false" />
+        <activity
+            android:name=".travelamash"
+            android:exported="false" />
+        <activity
+            android:name=".UserPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddNewTravelamash"
             android:exported="false" />
         <activity
