@@ -73,21 +73,51 @@ public class travelamash extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-         databaseService.getUserTravelList(new DatabaseService.DatabaseCallback<List<Travel>>() {
-             @Override
-             public void onCompleted(List<Travel> object) {
+        if(Loginamash.isAdmin){
 
-                 travelList.addAll(object);
-                 adapter.notifyDataSetChanged();
+            getAllTrvels();
 
-             }
 
-             @Override
-             public void onFailed(Exception e) {
+        }
+        else {
 
-             }
-         });
 
+            databaseService.getUserTravelList(new DatabaseService.DatabaseCallback<List<Travel>>() {
+                @Override
+                public void onCompleted(List<Travel> object) {
+
+                    travelList.addAll(object);
+                    adapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onFailed(Exception e) {
+
+                }
+            });
+
+
+        }
+
+    }
+
+    private void getAllTrvels() {
+
+        databaseService.getTravelList(new DatabaseService.DatabaseCallback<List<Travel>>() {
+            @Override
+            public void onCompleted(List<Travel> object) {
+
+                travelList.addAll(object);
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+
+            }
+        });
 
 
 

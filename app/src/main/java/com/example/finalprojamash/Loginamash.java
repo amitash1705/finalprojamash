@@ -29,6 +29,7 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
     public static final String mySharedPref = "myPref";
 
     private String email, password;
+    public  static boolean isAdmin=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +106,8 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
 
                 // admin check
                 if (email.equals("amit@gmail.com") && password.equals("123456")) {
+
+                    isAdmin=true;
 
                     Intent intent = new Intent(Loginamash.this, AdminActivityamash.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
