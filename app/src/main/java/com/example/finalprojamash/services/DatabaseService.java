@@ -44,7 +44,7 @@ public class DatabaseService {
     private static final String USERS_PATH = "users",
             ATTRACTIONS_PATH = "attractions",
 
-            USERTRAVEL_PATH = "usertravel",
+    USERTRAVEL_PATH = "usertravel",
             TRAVELS_PATH = "travels";
 
     /// callback interface for database operations

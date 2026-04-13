@@ -39,4 +39,10 @@ public class UserPageActivity extends AppCompatActivity {
         Intent intent1 = new Intent(UserPageActivity.this, travelamash.class);
         startActivity(intent1);
     }
+
+
+    public void goAddAttraction(View view) {
+        Intent intent = new Intent(UserPageActivity.this, AddAttractionActivityamash.class);
+        startActivity(intent);
+    }
 }

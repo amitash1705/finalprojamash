@@ -18,13 +18,14 @@
         android:textColor="@color/black"
         android:textSize="50dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddNewAttraction"
+        app:layout_constraintBottom_toTopOf="@+id/btnUsers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Users List -->
     <Button
-        android:id="@+id/btnAddNewAttraction"
+        android:id="@+id/btnUsers"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="8dp"
@@ -32,7 +33,7 @@
         android:layout_marginBottom="59dp"
         android:backgroundTint="#322196F3"
         android:fontFamily="@font/mimosa"
-        android:text="Add Attraction"
+        android:text="Users List"
         android:textColor="@color/black"
         android:textSize="25dp"
         app:cornerRadius="0dp"
@@ -41,6 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
+    <!-- Profile (לא שינינו) -->
     <Button
         android:id="@+id/btnpro"
         android:layout_width="0dp"
@@ -54,13 +56,14 @@
         android:textColor="@color/black"
         android:textSize="25dp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnattraction"
+        app:layout_constraintBottom_toTopOf="@+id/btnAttractions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddNewAttraction" />
+        app:layout_constraintTop_toBottomOf="@+id/btnUsers" />
 
+    <!-- Attractions List -->
     <Button
-        android:id="@+id/btnattraction"
+        android:id="@+id/btnAttractions"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="8dp"
@@ -68,17 +71,18 @@
         android:layout_marginBottom="59dp"
         android:backgroundTint="#322196F3"
         android:fontFamily="@font/mimosa"
-        android:text="Attraction"
+        android:text="Attractions List"
         android:textColor="@color/black"
         android:textSize="25dp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btntrip"
+        app:layout_constraintBottom_toTopOf="@+id/btnTrips"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnpro" />
 
+    <!-- Trips -->
     <Button
-        android:id="@+id/btntrip"
+        android:id="@+id/btnTrips"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="8dp"
@@ -90,25 +94,9 @@
         android:textColor="@color/black"
         android:textSize="25dp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnBackHome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnattraction" />
-
-    <Button
-        android:id="@+id/btnBackHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:backgroundTint="#322196F3"
-        android:fontFamily="@font/mimosa"
-        android:text="back"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btntrip" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAttractions" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

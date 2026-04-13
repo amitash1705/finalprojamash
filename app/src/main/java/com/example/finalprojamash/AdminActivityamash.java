@@ -18,57 +18,38 @@ public class AdminActivityamash extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin_activityamash);
 
-
-        Button btnBackHome = findViewById(R.id.btnBackHome);
-
-        btnBackHome.setOnClickListener(v -> {
-                    Intent intent = new Intent(AdminActivityamash.this, MainActivity.class);
-                    startActivity(intent);
-                    finish(); // סוגר את דף האודות כדי שלא יחזור אליו בלחיצה על BACK
+        // Users List
+        Button btnUsers = findViewById(R.id.btnUsers);
+        btnUsers.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminActivityamash.this, UserActivityamash.class);
+            startActivity(intent);
         });
 
-
-
+        // Profile
         Button btnpro = findViewById(R.id.btnpro);
-
         btnpro.setOnClickListener(v -> {
-            Intent intent1 = new Intent(AdminActivityamash.this, UserProfileamash.class);
-            startActivity(intent1);
+            Intent intent = new Intent(AdminActivityamash.this, UserProfileamash.class);
+            startActivity(intent);
         });
 
-
-        Button btnattraction = findViewById(R.id.btnattraction);
-
-        btnattraction.setOnClickListener(v -> {
-            Intent intent1 = new Intent(AdminActivityamash.this, attractionlistamash.class);
-            startActivity(intent1);
+        // Attractions List
+        Button btnAttractions = findViewById(R.id.btnAttractions);
+        btnAttractions.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminActivityamash.this, attractionlistamash.class);
+            startActivity(intent);
         });
 
+        Button btnTrips = findViewById(R.id.btnTrips);
 
-
-        // מוצאים את הכפתור לפי ה-id
-        Button btnAddNewAttraction = findViewById(R.id.btnAddNewAttraction);
-
-// מוסיפים מאזין לחיצה
-        btnAddNewAttraction.setOnClickListener(v -> {
-            // יוצרים Intent לעבור לדף AddAttractionActivityamash
-            Intent intent1 = new Intent(AdminActivityamash.this, AddAttractionActivityamash.class);
-            startActivity(intent1); // פותח את הדף החדש
+        btnTrips.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminActivityamash.this, travelamash.class);
+            startActivity(intent);
         });
-
-
-        Button btntrip = findViewById(R.id.btntrip);
-
-        btntrip.setOnClickListener(v -> {
-            Intent intent1 = new Intent(AdminActivityamash.this, AddNewTravelamash.class);
-            startActivity(intent1);
-        });
-
-
+        // מערכת רווחים (לא נוגעים בזה)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
     }
-    }
+}

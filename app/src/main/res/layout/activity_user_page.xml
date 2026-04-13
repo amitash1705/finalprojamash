@@ -85,6 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
+        android:onClick="goAddAttraction"
         android:id="@+id/btnAddNewAttraction"
         android:layout_width="0dp"
         android:layout_height="70dp"

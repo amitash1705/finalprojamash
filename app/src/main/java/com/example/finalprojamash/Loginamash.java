@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,18 +19,16 @@ import com.example.finalprojamash.services.DatabaseService;
 
 public class Loginamash extends AppCompatActivity implements View.OnClickListener {
 
-
     EditText etEmail, etPassword;
-    Button btnSubmit;
+    Button btnSubmit, btnBackHome;
 
     private static final String TAG = "LoginActivity";
 
     private DatabaseService databaseService;
     SharedPreferences sharedPreferences;
-    public  static  final  String mySharedPref="myPref";
+    public static final String mySharedPref = "myPref";
 
-    private String email,password;
-
+    private String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,114 +36,95 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_loginamash);
 
-
-      //  הוספה עכשיו
-
-        sharedPreferences=getSharedPreferences(mySharedPref,MODE_PRIVATE);
-
         databaseService = DatabaseService.getInstance();
 
-
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-
-
-
-       email= sharedPreferences.getString("email","");
-       password=  sharedPreferences.getString("password","");
+        sharedPreferences = getSharedPreferences(mySharedPref, MODE_PRIVATE);
 
         etEmail = findViewById(R.id.et_loginamash_email);
         etPassword = findViewById(R.id.et_loginamash_password);
 
-
-        etEmail.setText(email);
-        etPassword.setText(password);
         btnSubmit = findViewById(R.id.btn_login_submit);
-        Button btnBackHome = findViewById(R.id.btnBackHome);
+        btnBackHome = findViewById(R.id.btnBackHome);
 
         btnSubmit.setOnClickListener(this);
-
 
         btnBackHome.setOnClickListener(v -> {
             Intent intent = new Intent(Loginamash.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
+
+        // load saved data safely
+        email = sharedPreferences.getString("email", "");
+        password = sharedPreferences.getString("password", "");
+
+        etEmail.setText(email);
+        etPassword.setText(password);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
     }
 
     @Override
     public void onClick(View v) {
+
         if (v.getId() == btnSubmit.getId()) {
-            Log.d(TAG, "onClick: Login button clicked");
 
-             email = etEmail.getText().toString().trim();
-             password = etPassword.getText().toString().trim();
+            email = etEmail.getText().toString().trim();
+            password = etPassword.getText().toString().trim();
 
-            // Validate input
             if (email.isEmpty()) {
                 etEmail.setError("Enter email");
-              //  etEmail.requestFocus();
                 return;
             }
 
             if (password.isEmpty()) {
                 etPassword.setError("Enter password");
-               // etPassword.requestFocus();
                 return;
             }
-
-            Log.d(TAG, "Logging in with: " + email);
 
             loginUser(email, password);
         }
     }
 
-
     private void loginUser(String email, String password) {
 
-        Log.d(TAG, "loginUser: Calling Firebase login..."+email+"    "+ password);
+        Log.d(TAG, "loginUser: " + email);
 
         databaseService.LoginUser(email, password, new DatabaseService.DatabaseCallback<String>() {
             @Override
             public void onCompleted(String uid) {
-                Log.d(TAG, "User logged in! UID: " + uid);
 
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("email", email);
+                editor.putString("password", password);
+                editor.apply();
 
-                SharedPreferences.Editor editor=sharedPreferences.edit();
+                // admin check
+                if (email.equals("amit@gmail.com") && password.equals("123456")) {
 
+                    Intent intent = new Intent(Loginamash.this, AdminActivityamash.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
 
-                editor.putString("email",email);
-                editor.putString("password",password);
-                editor.commit();
+                } else {
 
-                if(email.equals("amit@gmail.com")&& (password.equals("123456"))) {
-
-                    Intent mainIntent = new Intent(Loginamash.this, AdminActivityamash.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-                }
-
-                else {
-                    Intent mainIntent = new Intent(Loginamash.this, UserPageActivity.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-
+                    Intent intent = new Intent(Loginamash.this, UserPageActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
             }
 
             @Override
             public void onFailed(Exception e) {
 
-                Log.e(TAG, "Firebase login failed", e);
-
-               // etPassword.setError("Invalid email or password");
-               // etPassword.requestFocus();
+                Log.e(TAG, "Login failed", e);
+                Toast.makeText(Loginamash.this,
+                        "Login failed. Check email/password",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
