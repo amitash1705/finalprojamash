@@ -1,5 +1,6 @@
 package com.example.finalprojamash;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -51,6 +52,10 @@ public class travelamash extends AppCompatActivity {
          adapter = new TravelAdapter(travelamash.this, travelList, new TravelAdapter.OnTravelClickListener() {
             @Override
             public void onEditClick(Travel travel, int position) {
+
+                Intent go=new Intent(travelamash.this, Travelprofileamash.class);
+                go.putExtra("travelId",travel.getId());
+                startActivity(go);
                 // קוד לפתיחת מסך עריכה
 
 

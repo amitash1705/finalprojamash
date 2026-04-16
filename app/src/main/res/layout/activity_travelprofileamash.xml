@@ -11,56 +11,70 @@
         android:id="@+id/tvtravelprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="20dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="27dp" />
+        app:layout_constraintBottom_toTopOf="@+id/ettravelnameprofile"
+        app:layout_constraintEnd_toStartOf="@+id/ettravelnameprofile"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvtravelnameprofile"
+    <EditText
+        android:id="@+id/ettravelnameprofile"
         android:layout_width="92dp"
-        android:layout_height="26dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="13dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="255dp"
-        tools:layout_editor_absoluteY="66dp" />
+        app:layout_constraintBottom_toTopOf="@+id/ettraveldetailsprofile"
+        app:layout_constraintEnd_toEndOf="@+id/ettraveldetailsprofile"
+        app:layout_constraintTop_toBottomOf="@+id/tvtravelprofile" />
 
     <EditText
         android:id="@+id/ettraveldetailsprofile"
         android:layout_width="346dp"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="1dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="105dp" />
+        app:layout_constraintBottom_toTopOf="@+id/rvtravelAttractionProfile"
+        app:layout_constraintEnd_toEndOf="@+id/rvtravelAttractionProfile"
+        app:layout_constraintTop_toBottomOf="@+id/ettravelnameprofile" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvtravelprofile"
-        android:layout_width="411dp"
-        android:layout_height="465dp"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="150dp" />
+        android:id="@+id/rvtravelAttractionProfile"
+        android:layout_width="407dp"
+        android:layout_height="379dp"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnbacktravelprofile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ettraveldetailsprofile" />
 
     <Button
         android:id="@+id/btnsaveedittravelprofile"
-        android:layout_width="120dp"
-        android:layout_height="70dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
         android:backgroundTint="#322196F3"
         android:fontFamily="@font/mimosa"
         android:text="Button"
         android:textColor="@color/black"
         android:textSize="25dp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnbacktravelprofile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnbacktravelprofile"
+        app:layout_constraintTop_toTopOf="@+id/btnbacktravelprofile" />
 
     <Button
         android:id="@+id/btnbacktravelprofile"
-        android:layout_width="120dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="146dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="150dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#322196F3"
         android:fontFamily="@font/mimosa"
@@ -70,5 +84,6 @@
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnsaveedittravelprofile"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvtravelAttractionProfile" />
 </androidx.constraintlayout.widget.ConstraintLayout>

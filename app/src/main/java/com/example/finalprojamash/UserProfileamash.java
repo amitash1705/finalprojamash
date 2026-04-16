@@ -23,6 +23,8 @@ import androidx.core.view.WindowInsetsCompat;
 //
 import android.widget.EditText;
 
+import com.example.finalprojamash.model.User;
+import com.example.finalprojamash.services.DatabaseService;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,11 +48,26 @@ public class UserProfileamash extends AppCompatActivity {
     private ActivityResultLauncher<Intent> selectImageLauncher;
     private ActivityResultLauncher<Intent> captureImageLauncher;
 
+
+    // constant to compare
+    // the activity result code
+    int SELECT_PICTURE = 200;
+
+
+    FirebaseAuth auto;
+    String userId;
+    User currentUser=null;
+
+    DatabaseService databaseService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_profileamash);
+
+
+
 
         // --- חיבור ל־Views ---
         ivProfilePic = findViewById(R.id.ivProfilePic);
@@ -60,21 +77,52 @@ public class UserProfileamash extends AppCompatActivity {
         tvUsername = findViewById(R.id.tvUsername);
         tvSettingsTitle = findViewById(R.id.tvSettingsTitle);
 
+
+
+        auto=FirebaseAuth.getInstance();
+        userId=auto.getUid();
+
+         databaseService=DatabaseService.getInstance();
+
+
+         databaseService.getUser(userId, new DatabaseService.DatabaseCallback<User>() {
+             @Override
+             public void onCompleted(User user) {
+
+                 currentUser=user;
+
+                 tvUsername.setText(currentUser.getFname());
+
+                 if (currentUser != null) {
+
+                     String displayName = currentUser.getFname();
+
+
+                     if (displayName == null || displayName.isEmpty()) {
+                         tvUsername.setText(displayName);
+                     } else {
+                         tvUsername.setText(displayName);
+                     }
+                 }
+
+
+
+                 if(currentUser.getPic()!=null)
+                        ivProfilePic.setImageBitmap(ImageUtil.convertFrom64base(currentUser.getPic()));
+
+             }
+
+             @Override
+             public void onFailed(Exception e) {
+
+             }
+         });
+
+
+
         //
         // --- הצגת username או email ---
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null) {
-
-            String displayName = user.getDisplayName();
-            String email = user.getEmail();
-
-            if (displayName == null || displayName.isEmpty()) {
-                tvUsername.setText(email);
-            } else {
-                tvUsername.setText(displayName);
-            }
-        }
 
 
 
@@ -98,7 +146,12 @@ public class UserProfileamash extends AppCompatActivity {
         });
 
         // --- שינוי שם משתמש ---
-        btnChangeUsername.setOnClickListener(v -> showChangeUsernameDialog());
+        btnChangeUsername.setOnClickListener(
+
+
+                v -> showChangeUsernameDialog());
+
+
 
         // --- Logout ---
         btnLogout.setOnClickListener(v -> {
@@ -147,6 +200,21 @@ public class UserProfileamash extends AppCompatActivity {
                         Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
                         ivProfilePic.setImageBitmap(bitmap);
                         ivProfilePic.setTag(null);
+
+                        currentUser.setPic(ImageUtil.convertTo64Base(ivProfilePic));
+                        databaseService.updateUser(currentUser, new DatabaseService.DatabaseCallback<Void>() {
+                            @Override
+                            public void onCompleted(Void object) {
+
+                            }
+
+                            @Override
+                            public void onFailed(Exception e) {
+
+                            }
+                        });
+
+
                     }
                 });
     }
@@ -161,29 +229,29 @@ public class UserProfileamash extends AppCompatActivity {
         builder.setView(input);
 
         builder.setPositiveButton("Save", (dialog, which) -> {
-            String newUsername = input.getText().toString().trim();
-            if (!newUsername.isEmpty()) {
-                // עדכון TextView
-                tvUsername.setText(newUsername);
+                    String newUsername = input.getText().toString().trim();
+                    if (!newUsername.isEmpty()) {
+                        // עדכון TextView
+                        tvUsername.setText(newUsername);
 
-                // עדכון Firebase
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    FirebaseAuth.getInstance().getCurrentUser().updateProfile(
-                            new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(newUsername)
-                                    .build()
-                    ).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(this, "Username updated", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(this, "Failed to update username", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            } else {
-                Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
-            }
-        });
+                        // עדכון Firebase
+
+                        currentUser.setFname(newUsername);
+                        currentUser.setPic(ImageUtil.convertTo64Base(ivProfilePic));
+                        databaseService.updateUser(currentUser, new DatabaseService.DatabaseCallback<Void>() {
+                            @Override
+                            public void onCompleted(Void object) {
+
+                            }
+
+                            @Override
+                            public void onFailed(Exception e) {
+
+                            }
+                        });
+
+                    }
+                });
 
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         builder.show();
@@ -214,12 +282,62 @@ public class UserProfileamash extends AppCompatActivity {
     }
 
     private void selectImageFromGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        selectImageLauncher.launch(intent);
+       imageChooser();
     }
 
     private void captureImageFromCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         captureImageLauncher.launch(intent);
     }
+
+
+    void imageChooser() {
+
+        // create an instance of the
+        // intent of the type image
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+
+        // pass the constant to compare it
+        // with the returned requestCode
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+    }
+
+    // this function is triggered when user
+    // selects the image from the imageChooser
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == SELECT_PICTURE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    // update the preview image in the layout
+                    ivProfilePic.setImageURI(selectedImageUri);
+
+                    currentUser.setPic(ImageUtil.convertTo64Base(ivProfilePic));
+
+                    databaseService.updateUser(currentUser, new DatabaseService.DatabaseCallback<Void>() {
+                        @Override
+                        public void onCompleted(Void object) {
+
+                        }
+
+                        @Override
+                        public void onFailed(Exception e) {
+
+                        }
+                    });
+
+
+                }
+            }
+        }
+    }
+
 }

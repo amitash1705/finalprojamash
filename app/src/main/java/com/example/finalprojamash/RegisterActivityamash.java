@@ -56,7 +56,7 @@ public class RegisterActivityamash extends AppCompatActivity implements View.OnC
         etEmail = findViewById(R.id.etEmail);
         etPassWord = findViewById(R.id.etpassword);
 
-        tvName = findViewById(R.id.tvName);
+
 
         btnGoAct2 = findViewById(R.id.btnSubmit);
         btnGoAct2.setOnClickListener(this);

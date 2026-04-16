@@ -1,247 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".AddAttractionActivityamash">
 
+    <!-- Title -->
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/mimosa"
         android:text="Add New Attraction"
-        android:textSize="50dp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="#111111"
+        android:fontFamily="@font/mimosa"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="32dp" />
+        android:layout_marginTop="32dp"/>
 
-
-    <Spinner
-        android:id="@+id/spCountry"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <Spinner
-        android:id="@+id/spType"
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-    <EditText
-        android:id="@+id/etPrice"
-        android:layout_width="123dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/mimosa"
-        android:gravity="center"
-        android:hint="Price"
-        android:inputType="numberDecimal"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toStartOf="@+id/etAge"
-        app:layout_constraintStart_toEndOf="@+id/etName"
-        app:layout_constraintTop_toBottomOf="@+id/spType" />
-
-    <EditText
-        android:id="@+id/etCity"
-        android:layout_width="192dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/mimosa"
-        android:gravity="center"
-        android:hint="City"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toStartOf="@+id/etWeb"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDetails" />
-
-    <EditText
-        android:id="@+id/etDetails"
-        android:layout_width="192dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/mimosa"
-        android:hint="Details"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toStartOf="@+id/etAdress"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etName" />
-
-    <Button
-        android:id="@+id/btnGallery"
-        android:layout_width="145dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#322196F3"
-        android:fontFamily="@font/mimosa"
-        android:text="Gallery"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWeb" />
-
-    <Button
-        android:id="@+id/btnPhoto"
-        android:layout_width="145dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#322196F3"
-        android:fontFamily="@font/mimosa"
-        android:text="Photo"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnGallery"
-        app:layout_constraintTop_toBottomOf="@+id/btnGallery" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="145dp"
-        android:layout_height="131dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="80dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnPhoto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCity"
-        tools:srcCompat="@tools:sample/avatars" />
-
-
-    <Button
-        android:id="@+id/btnAddNewAttraction"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="#322196F3"
-        android:fontFamily="@font/mimosa"
-        android:text="Creat New Attraction"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnPhoto"
-        app:layout_constraintHorizontal_bias="0.549"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
+    <!-- Country label -->
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/mimosa"
-        android:hint="pick a country"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick a country"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toBottomOf="@id/textView9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"/>
 
+    <!-- Country -->
+    <Spinner
+        android:id="@+id/spCountry"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintTop_toBottomOf="@id/textView11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Type label -->
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="190dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/mimosa"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:hint="pick type of attraction"
-        android:textSize="22dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick type"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toBottomOf="@id/spCountry"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spCountry" />
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"/>
 
+    <!-- Type -->
+    <Spinner
+        android:id="@+id/spType"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintTop_toBottomOf="@id/textView13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Row: Name -->
     <EditText
         android:id="@+id/etName"
-        android:layout_width="123dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:fontFamily="@font/mimosa"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:hint="Name"
-        android:inputType="text"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toStartOf="@+id/etPrice"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:background="#F3F3F3"
+        android:padding="10dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/spType"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spType" />
-
-    <EditText
-        android:id="@+id/etAdress"
-        android:layout_width="192dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@id/etPrice"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:fontFamily="@font/mimosa"
-        android:hint="Adress"
-        android:inputType="text"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etDetails"
-        app:layout_constraintTop_toBottomOf="@+id/etAge" />
+        android:layout_marginTop="20dp"/>
 
+    <!-- Price -->
+    <EditText
+        android:id="@+id/etPrice"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Price"
+        android:background="#F3F3F3"
+        android:padding="10dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@id/etName"
+        app:layout_constraintStart_toEndOf="@id/etName"
+        app:layout_constraintEnd_toStartOf="@id/etAge"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Age -->
     <EditText
         android:id="@+id/etAge"
-        android:layout_width="123dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:fontFamily="@font/mimosa"
-        android:hint="Ages"
-        android:inputType="numberDecimal"
-        android:textSize="25dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Age"
+        android:background="#F3F3F3"
+        android:padding="10dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@id/etName"
+        app:layout_constraintStart_toEndOf="@id/etPrice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etPrice"
-        app:layout_constraintTop_toBottomOf="@+id/spType" />
+        android:layout_marginEnd="32dp"/>
 
+    <!-- Details -->
+    <EditText
+        android:id="@+id/etDetails"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Details"
+        android:background="#F3F3F3"
+        android:padding="10dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/etName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/etAdress"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Address -->
+    <EditText
+        android:id="@+id/etAdress"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Address"
+        android:background="#F3F3F3"
+        android:padding="10dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@id/etDetails"
+        app:layout_constraintStart_toEndOf="@id/etDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"/>
+
+    <!-- City -->
+    <EditText
+        android:id="@+id/etCity"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="City"
+        android:background="#F3F3F3"
+        android:padding="10dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/etDetails"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/etWeb"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Web -->
     <EditText
         android:id="@+id/etWeb"
-        android:layout_width="192dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:fontFamily="@font/mimosa"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:hint="Website"
-        android:inputType="text"
-        android:textSize="25dp"
+        android:background="#F3F3F3"
+        android:padding="10dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@id/etCity"
+        app:layout_constraintStart_toEndOf="@id/etCity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etCity"
-        app:layout_constraintTop_toBottomOf="@+id/etAdress" />
+        android:layout_marginEnd="32dp"/>
 
+    <!-- Image -->
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintTop_toBottomOf="@id/etCity"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="32dp"
+        tools:srcCompat="@tools:sample/avatars"/>
+
+    <!-- Gallery -->
+    <Button
+        android:id="@+id/btnGallery"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Gallery"
+        android:backgroundTint="#EDEDED"
+        android:textColor="#111111"
+        app:cornerRadius="12dp"
+        app:layout_constraintTop_toTopOf="@id/imageView3"
+        app:layout_constraintStart_toEndOf="@id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"/>
+
+    <!-- Photo -->
+    <Button
+        android:id="@+id/btnPhoto"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Photo"
+        android:backgroundTint="#EDEDED"
+        android:textColor="#111111"
+        app:cornerRadius="12dp"
+        app:layout_constraintTop_toBottomOf="@id/btnGallery"
+        app:layout_constraintStart_toStartOf="@id/btnGallery"
+        app:layout_constraintEnd_toEndOf="@id/btnGallery"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Submit -->
+    <Button
+        android:id="@+id/btnAddNewAttraction"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:text="Create New Attraction"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#111111"
+        app:cornerRadius="16dp"
+        android:elevation="6dp"
+        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="32dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

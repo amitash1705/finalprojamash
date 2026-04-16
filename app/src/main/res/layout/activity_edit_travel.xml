@@ -7,4 +7,37 @@
     android:layout_height="match_parent"
     tools:context=".EditTravel">
 
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Item"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="149dp" />
+
+
+    <EditText
+        android:id="@+id/etTravelName"
+        android:layout_width="411dp"
+        android:layout_height="60dp"
+        android:hint="Name" />
+
+    <EditText
+        android:id="@+id/etTravelDetails"
+        android:layout_width="411dp"
+        android:layout_height="80dp"
+        android:hint="Details" />
+
+
+
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="411dp"
+        android:layout_height="60dp"
+        android:text="Save"
+        tools:layout_editor_absoluteY="100dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

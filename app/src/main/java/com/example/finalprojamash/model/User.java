@@ -8,6 +8,7 @@ public class User {
     protected String password;
     protected String phone;
 
+    protected String pic;
     public User(String id, String fname, String lname, String email, String phone ,String password) {
         this.id = id;
         this.fname = fname;
@@ -15,6 +16,16 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.password = password;
+    }
+
+    public User(String id, String fname, String lname, String email, String password, String phone, String pic) {
+        this.id = id;
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.pic = pic;
     }
 
     public User() {
@@ -66,6 +77,14 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 
     @Override
