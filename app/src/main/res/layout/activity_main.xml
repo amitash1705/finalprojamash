@@ -4,98 +4,100 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
-
-    <!-- Background (עדין ונקי במקום כחול כבד) -->
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#F7F9FC"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvhomepage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    android:background="#F7F9FC">
 
     <!-- Title -->
     <TextView
         android:id="@+id/tvhomepage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home Page"
-        android:textSize="34sp"
+        android:text="Explore The World"
+        android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="#111111"
-        android:letterSpacing="0.05"
         android:fontFamily="@font/mimosa"
+        android:letterSpacing="0.06"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/ivpic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="90dp"/>
 
-    <!-- Image -->
+    <!-- Logo -->
     <ImageView
         android:id="@+id/ivpic"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:scaleType="centerInside"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:src="@drawable/logo2amash"
+        android:scaleType="centerInside"
         app:layout_constraintTop_toBottomOf="@id/tvhomepage"
         app:layout_constraintBottom_toTopOf="@id/btnconect"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="32dp"/>
 
-    <!-- Login -->
+    <!-- Login (Primary) -->
     <Button
         android:id="@+id/btnconect"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:text="Login"
-        android:textColor="#FFFFFF"
+        android:layout_height="60dp"
+        android:text=" Login"
+        android:drawableStart="@android:drawable/ic_menu_send"
+        android:drawablePadding="8dp"
+       android:textColor="@color/white"
         android:textSize="16sp"
         android:fontFamily="@font/mimosa"
-        android:backgroundTint="#111111"
-        app:cornerRadius="16dp"
+       android:backgroundTint="@color/black"
+        app:cornerRadius="22dp"
+        android:foreground="?attr/selectableItemBackground"
         app:layout_constraintTop_toBottomOf="@id/ivpic"
+        app:layout_constraintBottom_toTopOf="@id/btnsigh"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="56dp"
         android:layout_marginHorizontal="32dp"/>
 
     <!-- Sign Up -->
     <Button
         android:id="@+id/btnsigh"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:text="Sign Up"
+        android:layout_height="60dp"
+        android:text=" Sign Up"
+        android:drawableStart="@android:drawable/ic_input_add"
+        android:drawablePadding="8dp"
         android:textColor="#111111"
         android:textSize="16sp"
         android:fontFamily="@font/mimosa"
-        android:backgroundTint="#EAEAEA"
-        app:cornerRadius="16dp"
+        android:backgroundTint="#FFFFFF"
+        app:cornerRadius="22dp"
+        android:foreground="?attr/selectableItemBackground"
         app:layout_constraintTop_toBottomOf="@id/btnconect"
+        app:layout_constraintBottom_toTopOf="@id/btnodot"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="32dp"/>
 
     <!-- About -->
     <Button
         android:id="@+id/btnodot"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:text="About"
+        android:layout_height="60dp"
+        android:text=" About"
+        android:drawableStart="@android:drawable/ic_menu_info_details"
+        android:drawablePadding="8dp"
         android:textColor="#666666"
         android:textSize="15sp"
         android:fontFamily="@font/mimosa"
         android:backgroundTint="#F2F2F2"
-        app:cornerRadius="16dp"
+        app:cornerRadius="22dp"
+        android:foreground="?attr/selectableItemBackground"
         app:layout_constraintTop_toBottomOf="@id/btnsigh"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginHorizontal="32dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

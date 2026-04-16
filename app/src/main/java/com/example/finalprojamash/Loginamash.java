@@ -45,15 +45,11 @@ public class Loginamash extends AppCompatActivity implements View.OnClickListene
         etPassword = findViewById(R.id.et_loginamash_password);
 
         btnSubmit = findViewById(R.id.btn_login_submit);
-        btnBackHome = findViewById(R.id.btnBackHome);
+
 
         btnSubmit.setOnClickListener(this);
 
-        btnBackHome.setOnClickListener(v -> {
-            Intent intent = new Intent(Loginamash.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        });
+
 
         // load saved data safely
         email = sharedPreferences.getString("email", "");
