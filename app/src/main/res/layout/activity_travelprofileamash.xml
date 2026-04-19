@@ -21,9 +21,9 @@
 
     <EditText
         android:id="@+id/ettravelnameprofile"
-        android:layout_width="92dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="43dp"
+        android:layout_width="110dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="44dp"
         android:layout_marginBottom="13dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/ettraveldetailsprofile"
@@ -32,10 +32,10 @@
 
     <EditText
         android:id="@+id/ettraveldetailsprofile"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginEnd="23dp"
+        android:layout_width="378dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
         android:layout_marginBottom="1dp"
         android:ems="10"
         android:inputType="text"
@@ -47,18 +47,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvtravelAttractionProfile2"
-        android:layout_width="412dp"
-        android:layout_height="370dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="365dp"
         android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnbacktravelprofile"
+        app:layout_constraintBottom_toTopOf="@+id/btnsaveedittravelprofile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ettraveldetailsprofile" />
 
     <Button
-        android:id="@+id/btnsaveedittravelprofile"
+        android:id="@+id/btnbacktravelprofile"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
@@ -68,13 +66,13 @@
         android:textColor="@color/black"
         android:textSize="25dp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnbacktravelprofile"
+        app:layout_constraintBottom_toBottomOf="@+id/btnsaveedittravelprofile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnbacktravelprofile"
-        app:layout_constraintTop_toTopOf="@+id/btnbacktravelprofile" />
+        app:layout_constraintStart_toEndOf="@+id/btnsaveedittravelprofile"
+        app:layout_constraintTop_toTopOf="@+id/btnsaveedittravelprofile" />
 
     <Button
-        android:id="@+id/btnbacktravelprofile"
+        android:id="@+id/btnsaveedittravelprofile"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="13dp"
@@ -87,7 +85,7 @@
         android:textSize="25dp"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnsaveedittravelprofile"
+        app:layout_constraintEnd_toStartOf="@+id/btnbacktravelprofile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvtravelAttractionProfile2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

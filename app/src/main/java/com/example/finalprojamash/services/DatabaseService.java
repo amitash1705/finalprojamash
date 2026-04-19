@@ -474,6 +474,24 @@ public class DatabaseService {
 
     // region travel section
 
+    /// update travel in the database
+    ///
+    /// @param travel     the travel object to create
+    /// @param callback the callback to call when the operation is completed
+    ///                                                               the callback will receive void
+    ///                                                              if the operation fails, the callback will receive an exception
+    /// @see DatabaseCallback
+    /// @see Travel
+    public void updateTravel(@NotNull final Travel travel, @Nullable final DatabaseCallback<Void> callback) {
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String uid= mAuth.getUid();
+        writeData(TRAVELS_PATH + "/" + travel.getId(), travel, callback);
+        writeData(USERTRAVEL_PATH + "/" + uid+"/"+travel.getId(), travel, callback);
+    }
+
+
+
     /// create a new travel in the database
     ///
     /// @param travel     the travel object to create
