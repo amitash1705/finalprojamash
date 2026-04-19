@@ -24,10 +24,7 @@ import java.util.List;
 
 public class Travelprofileamash extends AppCompatActivity {
     private static final String TAG ="EditTravel" ;
-    private Button btnsaveedittravelprofile, btnbacktravelprofile;
-    private TextView tvtravelprofile, tvtravelnameprofile;
 
-    private EditText ettraveldetailsprofile;
 
     Button btnSave, btnBack;
     EditText etName, etDetails;
