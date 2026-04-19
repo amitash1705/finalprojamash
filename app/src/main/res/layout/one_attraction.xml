@@ -3,81 +3,80 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="6dp">
+    android:layout_height="170dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- תמונת האטרקציה -->
-
-        <!-- חצי שקוף לטקסטים -->
-
+        <!-- Background Image -->
         <ImageView
             android:id="@+id/ivAttPic"
-            android:layout_width="117dp"
-            android:layout_height="112dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/countriesamash"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.04" />
-
-        <View
-            android:id="@+id/overlay"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:background="#3B00BCD4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- שם האטרקציה -->
+        <!-- Overlay -->
+        <View
+            android:id="@+id/overlay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#66000000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Attraction Name -->
         <TextView
             android:id="@+id/tvAttName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Attraction Name"
-          android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvAttCountry"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@id/tvAttCountry"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- מדינה -->
+        <!-- Country -->
         <TextView
             android:id="@+id/tvAttCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Country"
-           android:textColor="@color/black"
+            android:textColor="#EEEEEE"
             android:textSize="14sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:paddingStart="8dp"
-            android:paddingBottom="4dp"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- עיר -->
+        <!-- City -->
         <TextView
             android:id="@+id/tvAttCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="City"
-           android:textColor="@color/black"
+            android:textColor="#EEEEEE"
             android:textSize="14sp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:paddingEnd="8dp"
-            android:paddingBottom="4dp"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
