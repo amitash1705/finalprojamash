@@ -31,7 +31,7 @@ public class Travelprofileamash extends AppCompatActivity {
 
     Button btnSave, btnBack;
     EditText etName, etDetails;
-    RecyclerView rvAttractions;
+
     DatabaseService databaseService;
     ArrayList<Attraction> attractionsList;
     RecyclerView rcAttraction;
@@ -90,7 +90,7 @@ public class Travelprofileamash extends AppCompatActivity {
         btnSave = findViewById(R.id.btnsaveedittravelprofile);
         btnBack = findViewById(R.id.btnbacktravelprofile);
 
-        rvAttractions = findViewById(R.id.rvtravelAttractionProfile);
+        rcAttraction = findViewById(R.id.rvtravelAttractionProfile2);
         rcAttraction.setLayoutManager(new LinearLayoutManager(this));
 
 

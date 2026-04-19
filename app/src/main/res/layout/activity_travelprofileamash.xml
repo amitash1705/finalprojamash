@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="21dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/ettravelnameprofile"
         app:layout_constraintEnd_toStartOf="@+id/ettravelnameprofile"
@@ -32,21 +32,25 @@
 
     <EditText
         android:id="@+id/ettraveldetailsprofile"
-        android:layout_width="346dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginEnd="23dp"
         android:layout_marginBottom="1dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/rvtravelAttractionProfile"
-        app:layout_constraintEnd_toEndOf="@+id/rvtravelAttractionProfile"
+        app:layout_constraintBottom_toTopOf="@+id/rvtravelAttractionProfile2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ettravelnameprofile" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvtravelAttractionProfile"
-        android:layout_width="407dp"
-        android:layout_height="379dp"
+        android:id="@+id/rvtravelAttractionProfile2"
+        android:layout_width="412dp"
+        android:layout_height="370dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginBottom="22dp"
         app:layout_constraintBottom_toTopOf="@+id/btnbacktravelprofile"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,5 +89,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnsaveedittravelprofile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvtravelAttractionProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/rvtravelAttractionProfile2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
