@@ -1,9 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Finalprojamash" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <style name="Base.Theme.Finalprojamash" parent="Theme.Material3.DayNight">
+
+        <item name="colorPrimary">#111111</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <!-- זה מה שבאמת קובע את הפס העליון -->
+        <item name="android:statusBarColor">#111111</item>
+
     </style>
 
     <style name="Theme.Finalprojamash" parent="Base.Theme.Finalprojamash" />
+
 </resources>

@@ -52,4 +52,33 @@ public class AdminActivityamash extends AppCompatActivity {
             return insets;
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.menu_login) {
+            startActivity(new Intent(this, Loginamash.class));
+            return true;
+        }
+
+        if (id == R.id.menu_signup) {
+            startActivity(new Intent(this, RegisterActivityamash.class));
+            return true;
+        }
+
+        if (id == R.id.menu_about) {
+            startActivity(new Intent(this, odotamash.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

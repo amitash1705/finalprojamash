@@ -29,34 +29,28 @@ import java.util.List;
 
 public class AddNewTravelamash extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG ="ReadAttraction" ;
-
     DatabaseService databaseService;
 
-    ArrayList<Attraction> attractionsList, displayList=new ArrayList<>();
+    ArrayList<Attraction> attractionsList = new ArrayList<>();
+    ArrayList<Attraction> displayList = new ArrayList<>();
+    ArrayList<Attraction> selectedAttractions = new ArrayList<>();
 
     RecyclerView rcAttraction;
-
     AttractionAdapter adapter;
 
-    EditText  etTravelDetails;
-    Spinner spNameCounty;
-
-    ArrayList<Attraction> attractionArrayListTravel=new ArrayList<>();
-
+    EditText etTravelDetails;
+    Spinner spNameCountry;
+    TextView tvSelectedAttraction;
     Button btnAddNewTravel;
 
-    TextView tvSelectedAttraction;
-
-    String stAttraction="";
-
-    String country="";
+    String country = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_new_travelamash);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -69,95 +63,103 @@ public class AddNewTravelamash extends AppCompatActivity implements View.OnClick
             @Override
             public void onCompleted(List<Attraction> object) {
 
-                Log.d(TAG, "onCompleted: " + object);
                 attractionsList.clear();
+                displayList.clear();
+
                 attractionsList.addAll(object);
                 displayList.addAll(object);
+
                 adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onFailed(Exception e) {
-                Log.e(TAG, "onFailed: ", e);
+                Log.e("AddTravel", "Error loading attractions", e);
             }
         });
-
     }
 
     private void initViews() {
-        databaseService=DatabaseService.getInstance();
-        rcAttraction=findViewById(R.id.rvAttractions);
 
+        databaseService = DatabaseService.getInstance();
+
+        rcAttraction = findViewById(R.id.rvAttractions);
         rcAttraction.setLayoutManager(new LinearLayoutManager(this));
 
-        attractionsList=new ArrayList<>();
+        etTravelDetails = findViewById(R.id.etTravelDetails);
+        spNameCountry = findViewById(R.id.spCountry2);
+        tvSelectedAttraction = findViewById(R.id.tvSelectedAttraction);
+        btnAddNewTravel = findViewById(R.id.btnAddTravel);
 
-        adapter = new AttractionAdapter( displayList, new AttractionAdapter.OnAttrctionClickListener() {
+        btnAddNewTravel.setOnClickListener(this);
+
+        adapter = new AttractionAdapter(displayList, new AttractionAdapter.OnAttrctionClickListener() {
+
+            // 🟢 לחיצה רגילה = הוספה + בדיקה
             @Override
             public void onAttractionClick(Attraction attraction) {
 
-                if(attractionArrayListTravel.contains(attraction)) {
+                if (selectedAttractions.contains(attraction)) {
+
                     Toast.makeText(AddNewTravelamash.this,
-                            "You Picked This Attraction Already",
+                            "You already picked this attraction",
                             Toast.LENGTH_SHORT).show();
+
                 } else {
 
-                    attractionArrayListTravel.add(attraction);
-
-                    stAttraction += attraction.getName() + ", ";
-                    tvSelectedAttraction.setText(stAttraction);
-
-                    Log.d(TAG, "attraction Added: " + attractionArrayListTravel.size());
+                    selectedAttractions.add(attraction);
                 }
 
+                updateSelectedText();
             }
+
+            // 🔴 לחיצה ארוכה = ביטול בחירה
             @Override
             public void onLongAttractionClick(Attraction attraction) {
 
-                attractionArrayListTravel.remove(attraction);
-                String st="";
-                for(int i=0;i<attractionArrayListTravel.size();i++)
-                    st+=attractionArrayListTravel.get(i).getName();
-
-                tvSelectedAttraction.setText(st);
-                Log.d(TAG, "attraction Remove: " +attractionArrayListTravel.size());
-
+                if (selectedAttractions.contains(attraction)) {
+                    selectedAttractions.remove(attraction);
+                    updateSelectedText();
+                }
             }
-
         });
+
         rcAttraction.setAdapter(adapter);
 
-        etTravelDetails=findViewById(R.id.etTravelDetails);
-        spNameCounty=findViewById(R.id.spCountry2);
-        spNameCounty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spNameCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                country= (String) parent.getItemAtPosition(position);
-
+                country = (String) parent.getItemAtPosition(position);
                 filter(country);
             }
 
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
-
-        tvSelectedAttraction=findViewById(R.id.tvSelectedAttraction);
-
-        btnAddNewTravel=findViewById(R.id.btnAddTravel);
-        btnAddNewTravel.setOnClickListener(this);
-
     }
 
+
+    private void updateSelectedText() {
+
+        StringBuilder st = new StringBuilder();
+
+        for (Attraction a : selectedAttractions) {
+            st.append(a.getName()).append(", ");
+        }
+
+        tvSelectedAttraction.setText(st.toString());
+    }
+
+
     public void filter(String text) {
+
         displayList.clear();
 
         if (text.isEmpty()) {
             displayList.addAll(attractionsList);
         } else {
-            for (Attraction  item : attractionsList) {
+            for (Attraction item : attractionsList) {
                 if (item.getCountry().toLowerCase().contains(text.toLowerCase())) {
                     displayList.add(item);
                 }
@@ -170,45 +172,34 @@ public class AddNewTravelamash extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
 
-        String travelId=databaseService.generateTravelId();
-
-
+        String travelId = databaseService.generateTravelId();
         String details = etTravelDetails.getText().toString().trim();
 
-// בדיקה אם שם הטיול ריק
         if (details.isEmpty()) {
             etTravelDetails.setError("Please enter travel details");
-            etTravelDetails.requestFocus();
             return;
         }
 
-
-
-        Travel  newTravel= new Travel(travelId,country,attractionArrayListTravel,details);
-
-        if(attractionArrayListTravel!=null && attractionArrayListTravel.size()>0) {
-
-            databaseService.createNewTravel(newTravel, new DatabaseService.DatabaseCallback<Void>() {
-                @Override
-                public void onCompleted(Void object) {
-
-
-                    Intent intent1 = new Intent(AddNewTravelamash.this, UserPageActivity.class);
-                    startActivity(intent1);
-
-                }
-
-                @Override
-                public void onFailed(Exception e) {
-
-                }
-            });
-        }
-        else {
-
-            Toast.makeText(AddNewTravelamash.this, "please pick an attraction", Toast.LENGTH_SHORT).show();
-
+        if (selectedAttractions.isEmpty()) {
+            Toast.makeText(this, "Please pick attractions", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        }
+        Travel newTravel = new Travel(travelId, country, selectedAttractions, details);
+
+        databaseService.createNewTravel(newTravel, new DatabaseService.DatabaseCallback<Void>() {
+            @Override
+            public void onCompleted(Void object) {
+
+                startActivity(new Intent(AddNewTravelamash.this, UserPageActivity.class));
+                finish();
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+
+                Toast.makeText(AddNewTravelamash.this, "Error creating travel", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

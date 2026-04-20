@@ -29,7 +29,7 @@ public class Travelprofileamash extends AppCompatActivity implements View.OnClic
     private static final String TAG = "EditTravel";
 
 
-    Button btnSave, btnBack;
+    Button btnSave;
     EditText etName, etDetails;
 
     DatabaseService databaseService;
@@ -89,9 +89,9 @@ public class Travelprofileamash extends AppCompatActivity implements View.OnClic
         btnSave = findViewById(R.id.btnsaveedittravelprofile);
 
         btnSave.setOnClickListener(this);
-        btnBack = findViewById(R.id.btnbacktravelprofile);
 
-        btnBack.setOnClickListener(this);
+
+
 
         rcAttraction = findViewById(R.id.rvtravelAttractionProfile2);
         rcAttraction.setLayoutManager(new LinearLayoutManager(this));
@@ -225,10 +225,6 @@ public class Travelprofileamash extends AppCompatActivity implements View.OnClic
             finish();
 
 
-        }
-
-        if(v==btnBack){
-            finish();
         }
 
     }

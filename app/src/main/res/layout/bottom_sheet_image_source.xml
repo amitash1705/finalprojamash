@@ -28,7 +28,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="8dp"
         android:text="@string/image_source_title"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="#111111"
         android:gravity="center" />
@@ -40,7 +40,7 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="20dp"
         android:text="@string/image_source_subtitle"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:textColor="#777777"
         android:gravity="center" />
 
