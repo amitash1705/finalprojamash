@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finalprojamash">
         <activity
+            android:name=".Editattraction"
+            android:exported="false" />
+        <activity
             android:name=".EditTravel"
             android:exported="false" />
         <activity

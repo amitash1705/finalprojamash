@@ -81,11 +81,28 @@
         android:clipToPadding="false"
         android:padding="8dp"
         app:layout_constraintTop_toBottomOf="@id/tvAttractionsProfile"
+        app:layout_constraintBottom_toTopOf="@id/btneditAttractions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- NEW BUTTON: Edit Attractions -->
+    <Button
+        android:id="@+id/btneditAttractions"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:text="Add Attractions"
+        android:textSize="20sp"
+        android:backgroundTint="#111111"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/mimosa"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="12dp"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@id/btnsaveedittravelprofile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Save Button FULL WIDTH -->
+    <!-- Save Button -->
     <Button
         android:id="@+id/btnsaveedittravelprofile"
         android:layout_width="0dp"

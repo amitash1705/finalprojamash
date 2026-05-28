@@ -1,5 +1,6 @@
 package com.example.finalprojamash;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -20,18 +21,20 @@ import java.util.List;
 
 public class attractionlistamash extends AppCompatActivity {
 
-    private static final String TAG ="ReadAttraction" ;
+    private static final String TAG = "ReadAttraction";
+
     DatabaseService databaseService;
     ArrayList<Attraction> attractionsList;
     RecyclerView rcAttraction;
     AttractionAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_attractionlistamash);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -39,55 +42,66 @@ public class attractionlistamash extends AppCompatActivity {
         });
 
         initViews();
-
-
-       databaseService.getAttractionList(new DatabaseService.DatabaseCallback<List<Attraction>>() {
-           @Override
-            public void onCompleted(List<Attraction> object) {
-
-                Log.d(TAG, "onCompleted: " + object);
-               attractionsList.clear();
-               attractionsList.addAll(object);
-               adapter.notifyDataSetChanged();
-           }
-
-            @Override
-           public void onFailed(Exception e) {
-               Log.e(TAG, "onFailed: ", e);
-           }
-       });
-
+        loadData();
     }
 
     private void initViews() {
-        databaseService=DatabaseService.getInstance();
-        rcAttraction=findViewById(R.id.rcAttraction);
 
+        databaseService = DatabaseService.getInstance();
+
+        rcAttraction = findViewById(R.id.rcAttraction);
         rcAttraction.setLayoutManager(new LinearLayoutManager(this));
 
-        attractionsList=new ArrayList<>();
+        attractionsList = new ArrayList<>();
 
-        adapter = new AttractionAdapter( attractionsList, new AttractionAdapter.OnAttrctionClickListener() {
-            @Override
-            public void onAttractionClick(Attraction attraction) {
+        adapter = new AttractionAdapter(
+                attractionsList,
+                new AttractionAdapter.OnAttrctionClickListener() {
 
-               // attractionsList.add(attraction);
+                    @Override
+                    public void onAttractionClick(Attraction attraction) {
 
-              //  Log.d(TAG, "attraction Added: " +attractionsList.size());
+                        Intent go = new Intent(
+                                attractionlistamash.this,
+                                Editattraction.class
+                        );
 
-            }
+                        // מעבירים ID (יותר נכון לעתיד)
+                        go.putExtra("id", attraction.getId());
 
-            @Override
-            public void onLongAttractionClick(Attraction attraction) {
+                        startActivity(go);
+                    }
 
-               // attractionArrayListTravel.remove(attraction);
-               // Log.d(TAG, "attraction Remove: " +attractionArrayListTravel.size());
+                    @Override
+                    public void onLongAttractionClick(Attraction attraction) {
+                        // אפשר למחוק בעתיד
+                    }
+                }
+        );
 
-            }
-
-
-        });
         rcAttraction.setAdapter(adapter);
+    }
 
+    private void loadData() {
+
+        databaseService.getAttractionList(new DatabaseService.DatabaseCallback<List<Attraction>>() {
+
+            @Override
+            public void onCompleted(List<Attraction> object) {
+
+                Log.d(TAG, "onCompleted: " + object);
+
+                attractionsList.clear();
+                attractionsList.addAll(object);
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+
+                Log.e(TAG, "onFailed: ", e);
+            }
+        });
     }
 }

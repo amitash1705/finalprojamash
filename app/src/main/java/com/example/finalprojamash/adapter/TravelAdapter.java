@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalprojamash.R;
 import com.example.finalprojamash.model.Travel;
+import com.example.finalprojamash.utils.ImageUtil;
 
 
 import java.util.List;
@@ -50,6 +51,7 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.TravelView
 
         holder.tvDestination.setText(travel.getName()); // או שם הטיול
         holder.tvDetails.setText(travel.getDetails());
+        holder.ivTravelPic.setImageBitmap(ImageUtil.convertFrom64base(travel.getAttractionList().get(0).getPic()));
 
 
         holder.btnEdit.setOnClickListener(v -> {
@@ -89,6 +91,7 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.TravelView
             tvDetails = itemView.findViewById(R.id.tvTripDetails);
             btnEdit = itemView.findViewById(R.id.btnEditTrip);
             btnDelete = itemView.findViewById(R.id.btnDeleteTrip);
+            ivTravelPic = itemView.findViewById(R.id.ivTripPic);
         }
     }
 }

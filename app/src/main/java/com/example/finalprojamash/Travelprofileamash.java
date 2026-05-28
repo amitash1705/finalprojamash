@@ -1,19 +1,15 @@
 package com.example.finalprojamash;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,11 +21,9 @@ import com.example.finalprojamash.services.DatabaseService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Travelprofileamash extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "EditTravel";
+public class Travelprofileamash extends AppCompatActivity {
 
-
-    Button btnSave;
+    Button btnSave, btnEditAttractions;
     EditText etName, etDetails;
 
     DatabaseService databaseService;
@@ -37,49 +31,40 @@ public class Travelprofileamash extends AppCompatActivity implements View.OnClic
     RecyclerView rcAttraction;
     AttractionAdapter adapter;
 
-    String travelId;
     Travel travel;
-
+    String travelId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_travelprofileamash);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
 
         travelId = getIntent().getStringExtra("travelId");
         databaseService = DatabaseService.getInstance();
 
         initViews();
 
-
         databaseService.getTravel(travelId, new DatabaseService.DatabaseCallback<Travel>() {
             @Override
-            public void onCompleted(Travel travel2) {
-                travel = travel2;
+            public void onCompleted(Travel t) {
 
-                etName.setText(travel.getName());
-                etDetails.setText(travel.getDetails());
+                travel = t;
 
-                attractionsList.addAll(travel2.getAttractionList());
+                etName.setText(t.getName());
+                etDetails.setText(t.getDetails());
+
+                attractionsList.clear();
+                attractionsList.addAll(t.getAttractionList());
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailed(Exception e) {
-
+                Log.e("Travel", "error", e);
             }
         });
-
-
     }
-
 
     private void initViews() {
 
@@ -87,145 +72,124 @@ public class Travelprofileamash extends AppCompatActivity implements View.OnClic
         etDetails = findViewById(R.id.ettraveldetailsprofile);
 
         btnSave = findViewById(R.id.btnsaveedittravelprofile);
+        btnEditAttractions = findViewById(R.id.btneditAttractions);
 
-        btnSave.setOnClickListener(this);
+        btnSave.setOnClickListener(v -> saveTravel());
 
-
-
+        btnEditAttractions.setOnClickListener(v -> {
+            showAttractionsDialog();
+        });
 
         rcAttraction = findViewById(R.id.rvtravelAttractionProfile2);
         rcAttraction.setLayoutManager(new LinearLayoutManager(this));
 
-
         attractionsList = new ArrayList<>();
 
-        adapter = new AttractionAdapter(attractionsList, new AttractionAdapter.OnAttrctionClickListener() {
-            @Override
-            public void onAttractionClick(Attraction attraction) {
+        adapter = new AttractionAdapter(attractionsList,
+                new AttractionAdapter.OnAttrctionClickListener() {
 
-                //  attractionsList.add(attraction);
-
-                //  Log.d(TAG, "attraction Added: " +attractionsList.size());
-
-            }
-
-            @Override
-            public void onLongAttractionClick(Attraction attraction) {
-
-
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(Travelprofileamash.this);
-                builder.setTitle("אישור מחיקה");
-                builder.setMessage("האם ברצונך למחוק את הטרקציה?");
-
-                builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // כאן תשים את הקוד שמבצע את המחיקה
+                    public void onAttractionClick(Attraction attraction) {
+                        // אפשר להשאיר ריק או למחוק
+                    }
 
-
-                        attractionsList.remove(attraction);
-                        adapter.notifyDataSetChanged();
-
-
-                        databaseService.updateTravel(travel, new DatabaseService.DatabaseCallback<Void>() {
-                            @Override
-                            public void onCompleted(Void object) {
-
-                            }
-
-                            @Override
-                            public void onFailed(Exception e) {
-
-                            }
-                        });
-
-                        //updateTrip
+                    @Override
+                    public void onLongAttractionClick(Attraction attraction) {
+                        // מחיקה אם צריך
                     }
                 });
 
-                builder.setNegativeButton("לא", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
-
-
-
-
-                // Log.d(TAG, "attraction Remove: " +attractionArrayListTravel.size());
-
-            }
-
-
-        });
         rcAttraction.setAdapter(adapter);
-
     }
 
+    // =========================
+    // 🔥 DIALOG
+    // =========================
+    private void showAttractionsDialog() {
 
-    public void showDialog() {
+        if (travel == null) return;
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("אישור מחיקה");
-        builder.setMessage("האם ברצונך למחוק את הטרקציה?");
+        builder.setTitle("Select Attraction");
 
-        builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // כאן תשים את הקוד שמבצע את המחיקה
-            }
-        });
+        View view = getLayoutInflater().inflate(R.layout.dialog_attractions, null);
+        RecyclerView rv = view.findViewById(R.id.rvDialogAttractions);
+        rv.setLayoutManager(new LinearLayoutManager(this));
 
-        builder.setNegativeButton("לא", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+
+        builder.setView(view);
 
         AlertDialog dialog = builder.create();
+
+        databaseService.getAttractionList(new DatabaseService.DatabaseCallback<List<Attraction>>() {
+            @Override
+            public void onCompleted(List<Attraction> list) {
+
+                ArrayList<Attraction> filtered = new ArrayList<>();
+
+                for (Attraction a : list) {
+                    if (a.getCountry().equals(travel.getName())) {
+                        filtered.add(a);
+                    }
+                }
+
+                AttractionAdapter dialogAdapter =
+                        new AttractionAdapter(filtered,
+                                new AttractionAdapter.OnAttrctionClickListener() {
+
+                                    @Override
+                                    public void onAttractionClick(Attraction attraction) {
+
+                                       travel.getAttractionList().add(attraction);
+                                       adapter.notifyDataSetChanged();
+
+                                       databaseService.updateTravel(travel, new DatabaseService.DatabaseCallback<Void>() {
+                                           @Override
+                                           public void onCompleted(Void object) {
+
+                                           }
+
+                                           @Override
+                                           public void onFailed(Exception e) {
+
+                                           }
+                                       });
+                                        dialog.dismiss();
+                                    }
+
+                                    @Override
+                                    public void onLongAttractionClick(Attraction attraction) {
+                                    }
+                                });
+
+                rv.setLayoutManager(new LinearLayoutManager(Travelprofileamash.this));
+                rv.setAdapter(dialogAdapter);
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                Log.e("Dialog", "error", e);
+            }
+        });
+
         dialog.show();
-
-
     }
 
-    @Override
-    public void onClick(View v) {
+    private void saveTravel() {
 
-        if(v==btnSave){
+        travel.setName(etName.getText().toString());
+        travel.setDetails(etDetails.getText().toString());
 
-            String travelName=etName.getText().toString();
-            String travelDetails=etDetails.getText().toString();
-            //בדיקת תקינות
+        databaseService.updateTravel(travel, new DatabaseService.DatabaseCallback<Void>() {
+            @Override
+            public void onCompleted(Void v) {
+                finish();
+            }
 
-            travel.setDetails(travelDetails);
-            travel.setName(travelName);
-            databaseService.updateTravel(travel, new DatabaseService.DatabaseCallback<Void>() {
-                @Override
-                public void onCompleted(Void object) {
-
-                    //toast
-
-                }
-
-                @Override
-                public void onFailed(Exception e) {
-
-                    //toast
-
-                }
-            });
-
-            finish();
-
-
-        }
-
+            @Override
+            public void onFailed(Exception e) {
+                Log.e("Save", "error", e);
+            }
+        });
     }
 }
