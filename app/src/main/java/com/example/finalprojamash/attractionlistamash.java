@@ -67,7 +67,7 @@ public class attractionlistamash extends AppCompatActivity {
                         );
 
                         // מעבירים ID (יותר נכון לעתיד)
-                        go.putExtra("id", attraction.getId());
+                       go.putExtra("attId", attraction.getId());
 
                         startActivity(go);
                     }

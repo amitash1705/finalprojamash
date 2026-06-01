@@ -36,6 +36,11 @@ public class Editattraction extends AppCompatActivity {
 
     private ActivityResultLauncher<Intent> selectImageLauncher;
     private ActivityResultLauncher<Intent> captureImageLauncher;
+    private String attId;
+    private DatabaseService databaseService;
+
+    Attraction currentAttraction;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,40 @@ public class Editattraction extends AppCompatActivity {
         });
 
         initViews();
+
+
+        attId = getIntent().getStringExtra("attId");
+        databaseService = DatabaseService.getInstance();
+        databaseService.getAttraction(attId, new DatabaseService.DatabaseCallback<Attraction>() {
+            @Override
+            public void onCompleted(Attraction att) {
+                currentAttraction=att;
+                editCity.setText(att.getCity());
+                editPrice.setText(String.valueOf(att.getPrice()));
+                editDetails.setText(att.getDetails());
+                editName.setText(att.getName());
+                editAge.setText(att.getAges());
+                editAdress.setText(att.getAddress());
+                editWeb.setText(att.getWeb());
+
+                spCountry.setSelection(
+                        ((ArrayAdapter) spCountry.getAdapter()).getPosition(att.getCountry())
+                );
+
+                spType.setSelection(
+                        ((ArrayAdapter) spType.getAdapter()).getPosition(att.getType())
+                );
+
+                imageView.setImageBitmap(ImageUtil.convertFrom64base(att.getPic()));
+
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+
+            }
+        });
+
         setupSpinners();
         setupImagePickers();
     }
