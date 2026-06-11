@@ -336,12 +336,16 @@ public class DatabaseService {
 
     /// delete a user from the database
     ///
-    /// @param uid      the user id to delete
+    /// @param userId      the user id to delete
     /// @param callback the callback to call when the operation is completed
-    public void deleteUser(@NotNull final String uid, @Nullable final DatabaseCallback<Void> callback) {
-        deleteData(USERS_PATH + "/" + uid, callback);
-    }
+    public void deleteUser(@NotNull final String userId, @Nullable final DatabaseCallback<Void> callback) {
 
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String uid= mAuth.getUid();
+        deleteData(USERS_PATH + "/" + userId,  callback);
+        deleteData(USERTRAVEL_PATH + "/" + uid, callback);
+    }
     /// get a user by email and password
     ///
     /// @param email    the email of the user
@@ -531,7 +535,7 @@ public class DatabaseService {
 
     /// get all the travels of a specific user from the database
     ///
-    /// @param uid      the id of the user to get the travels for
+
     /// @param callback the callback to call when the operation is completed
     public void getUserTravelList( @NotNull final DatabaseService.DatabaseCallback<List<Travel>> callback) {
 
@@ -568,5 +572,25 @@ public class DatabaseService {
 
     // endregion travel section
 
-}
+
+    /// update an attraction in the database
+    ///
+    /// @param attraction the attraction to update in the database
+    /// @param callback the callback to call when the operation is completed
+
+    public void updateAttraction(Attraction attraction, DatabaseCallback<Void> callback) {
+
+        databaseReference
+                .child("attractions")
+                .child(attraction.getId())
+                .setValue(attraction)
+                .addOnSuccessListener(aVoid -> callback.onCompleted(null))
+                .addOnFailureListener(callback::onFailed);
+    }
+
+
+    }
+
+
+
 

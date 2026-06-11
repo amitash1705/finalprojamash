@@ -9,6 +9,12 @@
     android:background="#F7F9FC"
     tools:context=".AddNewTravelamash">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/backamash"
+        android:scaleType="centerCrop"/>
+
     <!-- Title -->
     <TextView
         android:id="@+id/tvTitle"
@@ -54,9 +60,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Attractions title -->
 
-    <!-- RecyclerView -->
 
     <TextView
         android:id="@+id/tvAttractions"

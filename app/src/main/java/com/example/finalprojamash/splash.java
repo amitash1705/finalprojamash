@@ -14,33 +14,54 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class splash extends AppCompatActivity {
 
+    // ImageView שמציג את הלוגו במסך פתיחה
     private ImageView myImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // מצב מסך מלא (EdgeToEdge UI)
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_splash);
-        myImageView=(ImageView) findViewById(R.id.imageView) ;
 
+        // חיבור ImageView מה-XML
+        myImageView = (ImageView) findViewById(R.id.imageView);
 
+        // יצירת Thread למסך פתיחה (Splash Screen)
         Thread msplashTread = new Thread() {
             @Override
             public void run() {
                 try {
+
                     synchronized (this) {
-                        Animation myFadeInAnimation = AnimationUtils.loadAnimation(splash.this,R.anim.tween);
+
+                        // טעינת אנימציה (Fade In)
+                        Animation myFadeInAnimation =
+                                AnimationUtils.loadAnimation(splash.this, R.anim.tween);
+
+                        // הפעלת אנימציה על הלוגו
                         myImageView.startAnimation(myFadeInAnimation);
-                        wait(3000);
+
+                        // השהייה של 2 שניות
+                        wait(2000);
                     }
+
                 } catch (InterruptedException ex) {
+                    // טיפול בשגיאת השהייה
                 }
+
+                // סגירת מסך הספלש
                 finish();
 
+                // מעבר למסך הראשי
                 Intent intent = new Intent(splash.this, MainActivity.class);
                 startActivity(intent);
             }
         };
+
+        // התחלת ה-Thread
         msplashTread.start();
     }
 }

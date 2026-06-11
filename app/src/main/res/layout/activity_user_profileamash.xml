@@ -9,6 +9,13 @@
     android:background="#F7F9FC"
     tools:context=".UserProfileamash">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/backamash"
+        android:scaleType="centerCrop"/>
+
+
     <!-- Profile Image -->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivProfilePic"

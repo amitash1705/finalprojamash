@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".Editattraction">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/backamash"
+        android:scaleType="centerCrop"/>
+
     <!-- Title -->
     <TextView
         android:id="@+id/Editattraction"

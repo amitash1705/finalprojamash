@@ -9,6 +9,12 @@
     android:background="#FFFFFF"
     tools:context=".RegisterActivityamash">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/backamash"
+        android:scaleType="centerCrop"/>
+
     <!-- Title -->
     <TextView
         android:id="@+id/textView3"
@@ -107,7 +113,7 @@
         android:id="@+id/btnSubmit"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:text="Next Page"
+        android:text="sign up"
         android:textColor="#FFFFFF"
         android:backgroundTint="#111111"
         android:textSize="20sp"

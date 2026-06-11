@@ -25,25 +25,29 @@ import com.example.finalprojamash.model.Attraction;
 import com.example.finalprojamash.services.DatabaseService;
 import com.example.finalprojamash.utils.ImageUtil;
 
+import java.util.List;
+
 public class AddAttractionActivityamash extends AppCompatActivity {
 
 
     ImageView imageView;
 
-    /// Activity result launcher for selecting image from gallery
+    /// Launcher לבחירת תמונה מהגלריה
     private ActivityResultLauncher<Intent> selectImageLauncher;
-    /// Activity result launcher for capturing image from camera
+
+    /// Launcher לצילום תמונה מהמצלמה
     private ActivityResultLauncher<Intent> captureImageLauncher;
 
 
-    private EditText etCity, etPrice, etDetails, etName, etAge, etAdress, etWeb ;
+    private EditText etCity, etPrice, etDetails, etName, etAge, etAdress, etWeb;
     private Spinner spType, spCountry;
     private Button btnGallery, btnPhoto, btnAddNewAttraction;
 
 
-    // constant to compare
-    // the activity result code
+    // קוד לזיהוי בחירת תמונה (גלריה)
     int SELECT_PICTURE = 200;
+
+    DatabaseService databaseService;
 
 
     @Override
@@ -52,6 +56,10 @@ public class AddAttractionActivityamash extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_attraction_activityamash);
 
+
+        databaseService = DatabaseService.getInstance();
+
+        // חיבור כל שדות הטקסט מהמסך
         etCity = findViewById(R.id.etCity);
         etPrice = findViewById(R.id.etPrice);
         etDetails = findViewById(R.id.etDetails);
@@ -60,9 +68,11 @@ public class AddAttractionActivityamash extends AppCompatActivity {
         etAdress = findViewById(R.id.etAdress);
         etWeb = findViewById(R.id.etWeb);
 
+        // חיבור ה-Spinner של סוג ושל מדינה
         spType = findViewById(R.id.spType);
         spCountry = findViewById(R.id.spCountry);
 
+        // כפתורי פעולה
         btnGallery = findViewById(R.id.btnGallery);
         btnPhoto = findViewById(R.id.btnPhoto);
         btnAddNewAttraction = findViewById(R.id.btnAddNewAttraction);
@@ -75,29 +85,36 @@ public class AddAttractionActivityamash extends AppCompatActivity {
         });
 
         imageView = findViewById(R.id.imageView3);
+
+        // הגדרת ה-Spinnerים (מדינה וסוג אטרקציה)
         setUpSpinner();
+
+        // הגדרת בחירת תמונה מהגלריה/מצלמה
         setUpGallery();
 
         Button btnAddNewAttraction = findViewById(R.id.btnAddNewAttraction);
-        btnAddNewAttraction.setOnClickListener(v -> {
 
+        // לחיצה על הוספת אטרקציה
+        btnAddNewAttraction.setOnClickListener(v -> {
             addToDB();
         });
 
     }
 
     private void addToDB() {
-        String city = etCity.getText().toString()+"";
-        String price = etPrice.getText().toString()+"";
-        String details = etDetails.getText().toString()+"";
-        String name = etName.getText().toString()+"";
-        String age = etAge.getText().toString()+"";
-        String adress = etAdress.getText().toString()+"";
-        String web = etWeb.getText().toString()+"";
 
+        // קריאת כל הנתונים מהטופס
+        String city = etCity.getText().toString() + "";
+        String price = etPrice.getText().toString() + "";
+        String details = etDetails.getText().toString() + "";
+        String name = etName.getText().toString() + "";
+        String age = etAge.getText().toString() + "";
+        String adress = etAdress.getText().toString() + "";
+        String web = etWeb.getText().toString() + "";
 
-       String type = spType.getSelectedItem().toString();
-       String country = spCountry.getSelectedItem().toString();
+        // קבלת ערכים מה-Spinner
+        String type = spType.getSelectedItem().toString();
+        String country = spCountry.getSelectedItem().toString();
 
         // בדיקה שכל השדות מלאים
         if (city.isEmpty() || price.isEmpty() || details.isEmpty() || name.isEmpty() || age.isEmpty() || adress.isEmpty() || web.isEmpty()) {
@@ -105,54 +122,85 @@ public class AddAttractionActivityamash extends AppCompatActivity {
             return;
         }
 
-
-        // create attraction
-        String id = DatabaseService.getInstance().generateAttractionId();
-        String pic = ImageUtil.convertTo64Base(imageView);
-        Attraction attraction = new Attraction(id,name,country,type,adress,city,Double.parseDouble(price),pic,age,details,web);
-
-        ///  call to database service
-        DatabaseService.getInstance().createNewAttraction(attraction, new DatabaseService.DatabaseCallback<Void>() {
+        // בדיקה אם האטרקציה כבר קיימת לפי שם ומדינה
+        isAttractionExists(name, country, new DatabaseService.DatabaseCallback<Boolean>() {
             @Override
-            public void onCompleted(Void v) {
-                Toast.makeText(AddAttractionActivityamash.this, "Yay!", Toast.LENGTH_SHORT).show();
-                finish(); // סוגר את דף האודות כדי שלא יחזור אליו בלחיצה על BACK
+            public void onCompleted(Boolean exists) {
+
+                if (exists) {
+                    System.out.println("Exists");
+
+                    Toast.makeText(AddAttractionActivityamash.this, "the attraction is already exists", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    // יצירת מזהה חדש לאטרקציה
+                    String id = DatabaseService.getInstance().generateAttractionId();
+
+                    // המרת תמונה ל-Base64
+                    String pic = ImageUtil.convertTo64Base(imageView);
+
+                    // יצירת אובייקט אטרקציה חדש
+                    Attraction attraction = new Attraction(id, name, country, type, adress, city, Double.parseDouble(price), pic, age, details, web);
+
+                    // שמירה למסד הנתונים
+                    databaseService.createNewAttraction(attraction, new DatabaseService.DatabaseCallback<Void>() {
+                        @Override
+                        public void onCompleted(Void v) {
+
+                            Toast.makeText(AddAttractionActivityamash.this, "Yay!", Toast.LENGTH_SHORT).show();
+
+                            // סגירת המסך וחזרה אחורה
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailed(Exception e) {
+
+                        }
+                    });
+
+                }
             }
 
             @Override
             public void onFailed(Exception e) {
-
+                e.printStackTrace();
             }
         });
+
     }
 
     private void setUpGallery() {
-        /// register the activity result launcher for selecting image from gallery
+
+        /// רישום פתיחת גלריה ובחירת תמונה
         selectImageLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         Uri selectedImage = result.getData().getData();
                         imageView.setImageURI(selectedImage);
-                        /// set the tag for the image view to null
+
+                        // איפוס תגית התמונה
                         imageView.setTag(null);
                     }
                 });
 
-        /// register the activity result launcher for capturing image from camera
+        /// רישום פתיחת מצלמה וצילום תמונה
         captureImageLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
                         imageView.setImageBitmap(bitmap);
-                        /// set the tag for the image view to null
+
+                        // איפוס תגית התמונה
                         imageView.setTag(null);
                     }
                 });
 
-
-       btnGallery.setOnClickListener(new View.OnClickListener() {
+        // כפתור פתיחת גלריה
+        btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImageUtil.requestPermission(AddAttractionActivityamash.this);
@@ -160,8 +208,8 @@ public class AddAttractionActivityamash extends AppCompatActivity {
             }
         });
 
-
-       btnPhoto.setOnClickListener(new View.OnClickListener() {
+        // כפתור פתיחת מצלמה
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImageUtil.requestPermission(AddAttractionActivityamash.this);
@@ -171,39 +219,39 @@ public class AddAttractionActivityamash extends AppCompatActivity {
     }
 
     private void setUpSpinner() {
-        // ======== כאן מתחיל הקוד של ה-Spinner ========
+
+        // ===== Spinner מדינות =====
         Spinner spinner = findViewById(R.id.spCountry);
 
-        // יצירת Adapter מהרשימה ב-strings.xml
+        // יצירת Adapter מרשימת המדינות בקובץ strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.countryArr, android.R.layout.simple_spinner_item);
 
-        // איך הרשימה תוצג כשפותחים את ה-Spinner
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // חיבור ה-Adapter ל-Spinner
         spinner.setAdapter(adapter);
 
-
-        // ======== Spinner שני - סוג אטרקציה ========
+        // ===== Spinner סוג אטרקציה =====
         Spinner typeArr = findViewById(R.id.spType);
 
         ArrayAdapter<CharSequence> adapterAttraction = ArrayAdapter.createFromResource(this,
                 R.array.typeArr, android.R.layout.simple_spinner_item);
 
         adapterAttraction.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         typeArr.setAdapter(adapterAttraction);
-        typeArr.setSelection(0); // פריט ברירת מחדל
-        // ======== סוף Spinner שני ========
+
+        // בחירת ערך ברירת מחדל
+        typeArr.setSelection(0);
     }
 
-
-    /// select image from gallery
+    /// פתיחת גלריה
     private void selectImageFromGallery() {
         imageChooser();
     }
 
-    /// capture image from camera
+    /// פתיחת מצלמה
     private void captureImageFromCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         captureImageLauncher.launch(takePictureIntent);
@@ -211,34 +259,65 @@ public class AddAttractionActivityamash extends AppCompatActivity {
 
     void imageChooser() {
 
-        // create an instance of the
-        // intent of the type image
+        // יצירת Intent לבחירת תמונה מהגלריה
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
 
-        // pass the constant to compare it
-        // with the returned requestCode
+        // פתיחת מסך בחירת תמונה
         startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
     }
 
-    // this function is triggered when user
-    // selects the image from the imageChooser
+    // טיפול בתוצאה של בחירת תמונה
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
 
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
             if (requestCode == SELECT_PICTURE) {
-                // Get the url of the image from data
+
                 Uri selectedImageUri = data.getData();
+
                 if (null != selectedImageUri) {
-                    // update the preview image in the layout
                     imageView.setImageURI(selectedImageUri);
                 }
             }
         }
+    }
+
+    // בדיקה אם אטרקציה כבר קיימת במסד הנתונים
+    public void isAttractionExists(
+            String name,
+            String country,
+            DatabaseService.DatabaseCallback<Boolean> callback) {
+
+        databaseService.getAttractionList(new DatabaseService.DatabaseCallback<List<Attraction>>() {
+
+            @Override
+            public void onCompleted(List<Attraction> list) {
+
+                if (list == null) {
+                    callback.onCompleted(false);
+                    return;
+                }
+
+                for (Attraction attraction : list) {
+                    if (attraction != null
+                            && name.equalsIgnoreCase(attraction.getName())
+                            && country.equalsIgnoreCase(attraction.getCountry())) {
+
+                        callback.onCompleted(true);
+                        return;
+                    }
+                }
+
+                callback.onCompleted(false);
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                callback.onFailed(e);
+            }
+        });
     }
 }
