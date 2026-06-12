@@ -1,4 +1,4 @@
-
+package com.example.finalprojamash.adapter;
 // RecyclerView - רשימה חכמה שממחזרת Views כדי לחסוך זיכרון וביצועים
 import android.view.LayoutInflater;
 import android.view.View;

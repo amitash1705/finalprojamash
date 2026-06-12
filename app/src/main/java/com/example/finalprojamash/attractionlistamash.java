@@ -3,6 +3,9 @@ package com.example.finalprojamash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +34,15 @@ public class attractionlistamash extends AppCompatActivity {
 
     RecyclerView rcAttraction;
     AttractionAdapter adapter;
+    // רשימה שמוצגת בפועל (אחרי פילטר)
+    ArrayList<Attraction> displayList = new ArrayList<>();
+
+    // רשימת אטרקציות שנבחרו ע"י המשתמש
+    ArrayList<Attraction> selectedAttractions = new ArrayList<>();
+
+    Spinner spNameCountry;
+
+    String country;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +75,31 @@ public class attractionlistamash extends AppCompatActivity {
         // חיבור RecyclerView והגדרת תצוגה אנכית
         rcAttraction = findViewById(R.id.rcAttraction);
         rcAttraction.setLayoutManager(new LinearLayoutManager(this));
+        spNameCountry=findViewById(R.id.spCountry3);
+
+
+        // שינוי בחירה ב-Spinner (מדינה)
+        spNameCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // עדכון מדינה נבחרת
+                country = (String) parent.getItemAtPosition(position);
+
+                // סינון לפי מדינה
+                filter(country);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         // יצירת רשימה ריקה לאטרקציות
         attractionsList = new ArrayList<>();
 
         // יצירת Adapter לרשימה
         adapter = new AttractionAdapter(
-                attractionsList,
+                displayList,
                 new AttractionAdapter.OnAttrctionClickListener() {
 
                     // לחיצה על אטרקציה → מעבר למסך עריכה
@@ -99,33 +129,72 @@ public class attractionlistamash extends AppCompatActivity {
         rcAttraction.setAdapter(adapter);
     }
 
-    private void loadData() {
+
+
+
+
+
+// עדכון טקסט של אטרקציות שנבחרו
+//private void updateSelectedText() {
+
+ //   StringBuilder st = new StringBuilder();
+
+    // מעבר על כל האטרקציות שנבחרו
+ //   for (Attraction a : selectedAttractions) {
+ //       st.append(a.getName()).append(", ");
+  //  }
+
+  //  tvSelectedAttraction.setText(st.toString());
+//}
+
+
+private void loadData() {
+
 
         // שליפת כל האטרקציות מהדאטהבייס
         databaseService.getAttractionList(new DatabaseService.DatabaseCallback<List<Attraction>>() {
-
             @Override
             public void onCompleted(List<Attraction> object) {
 
-                // לוג לבדיקה (כמה אטרקציות התקבלו)
-                Log.d(TAG, "onCompleted: " + object);
-
-                // ניקוי רשימה ישנה
+                // ניקוי רשימות לפני טעינה מחדש
                 attractionsList.clear();
+                displayList.clear();
 
-                // טעינת נתונים חדשים
+                // טעינת נתונים מהרשימה
                 attractionsList.addAll(object);
+                displayList.addAll(object);
 
-                // עדכון המסך
+                // עדכון RecyclerView
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailed(Exception e) {
-
-                // לוג שגיאה
-                Log.e(TAG, "onFailed: ", e);
+                Log.e("AddTravel", "Error loading attractions", e);
             }
         });
+
+
     }
+
+    // סינון אטרקציות לפי מדינה
+    public void filter(String text) {
+
+        displayList.clear();
+
+        if (text.isEmpty()) {
+            displayList.addAll(attractionsList);
+        } else {
+            for (Attraction item : attractionsList) {
+                if (item.getCountry().toLowerCase().contains(text.toLowerCase())) {
+                    displayList.add(item);
+                }
+            }
+        }
+
+
+        // עדכון רשימה במסך
+        adapter.notifyDataSetChanged();
+    }
+
 }

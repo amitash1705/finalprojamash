@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.finalprojamash.adapter.TravelAdapter;
 import com.example.finalprojamash.model.Attraction;
 import com.example.finalprojamash.model.Travel;

@@ -1,4 +1,4 @@
-
+package com.example.finalprojamash.adapter;
 // מאפשר להשתמש ב-INVISIBLE כדי להסתיר כפתורים
 import static android.view.View.INVISIBLE;
 
